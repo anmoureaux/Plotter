@@ -45,6 +45,9 @@ def windowInit():
     fen.rowconfigure(4,pad=0)
     fen.rowconfigure(5,pad=20)
     fen.rowconfigure(6,pad=20)
+    fen.rowconfigure(7,pad=20)
+    fen.rowconfigure(8,pad=20)
+    fen.rowconfigure(9,pad=20)
 
     myColor1 = '#78f8ff'
     myColor2 = '#78cbff'
@@ -79,8 +82,8 @@ def windowInit():
     greatbarre4.grid(row=4,column=0,columnspan=7,sticky=EW)
 
     funConsigne = Label(fen,text="Écrivez ici la fonction à afficher (sous le format y=f(x)) : ")
-    funConsigne.configure(font=('Courrier',20),bg = myColor3)
-    funConsigne.grid(row=5,column = 0,columnspan=3,sticky=E)
+    funConsigne.configure(font=('Courrier',20),bg = myColor2)
+    funConsigne.grid(row=5,column = 0,columnspan=3,sticky=EW)
    
     ylabel = Label(fen,text="f(x) = ")
     ylabel.configure(font=('Courrier',20))
@@ -88,7 +91,25 @@ def windowInit():
 
     funexpr = Entry(fen)
     funexpr.grid(row=6,column=1,columnspan=2,sticky=EW)
+
+    absconsigne = Label(fen,text="Entrez les abscisses minimale et maximale : ")
+    absconsigne.configure(font=('Courrier',20),bg=myColor3)
+    absconsigne.grid(row=7,column=0,columnspan=3,sticky=EW)
     
+    absminlabel = Label(fen,text="abscisse minimale : ")
+    absminlabel.configure(font=('Courrier',20))
+    absminlabel.grid(row=8,column=0,columnspan=1,sticky=EW)
+
+    absminexpr = Entry(fen)
+    absminexpr.grid(row=8,column=1,columnspan=2,sticky=EW)
+
+    absmaxlabel = Label(fen,text="abscisse maximale : ")
+    absmaxlabel.configure(font=('Courrier',20))
+    absmaxlabel.grid(row=9,column=0,columnspan=1,sticky=EW)
+
+    absmaxexpr = Entry(fen)
+    absmaxexpr.grid(row=9,column=1,columnspan=2,sticky=EW)
+
     return fen
     
 def main():
