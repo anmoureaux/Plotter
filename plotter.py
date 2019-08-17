@@ -61,7 +61,7 @@ def windowInit():
 
     title = Label(fen,text="Plot")
     title.configure(font=('Courrier',30),bg=myColor1)
-    title.grid(row=0,column=3,columnspan = 1,sticky=EW)
+    title.grid(row=0,column=0,columnspan = 7,sticky=EW)
 
     greatbarre1=Label(fen,text="")
     greatbarre1.configure(bg=myColor2,font=('Courrier',20))
