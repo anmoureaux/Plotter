@@ -44,6 +44,7 @@ def windowInit():
     fen.rowconfigure(3,pad=0)
     fen.rowconfigure(4,pad=0)
     fen.rowconfigure(5,pad=20)
+    fen.rowconfigure(6,pad=20)
 
     myColor1 = '#78f8ff'
     myColor2 = '#78cbff'
@@ -79,8 +80,15 @@ def windowInit():
 
     funConsigne = Label(fen,text="Écrivez ici la fonction à afficher (sous le format y=f(x)) : ")
     funConsigne.configure(font=('Courrier',20),bg = myColor3)
-    funConsigne.grid(row=5,column = 0,columnspan=7,sticky=W)
+    funConsigne.grid(row=5,column = 0,columnspan=3,sticky=E)
    
+    ylabel = Label(fen,text="f(x) = ")
+    ylabel.configure(font=('Courrier',20))
+    ylabel.grid(row=6,column=0,columnspan=1,sticky=EW)
+
+    funexpr = Entry(fen)
+    funexpr.grid(row=6,column=1,columnspan=2,sticky=EW)
+    
     return fen
     
 def main():
