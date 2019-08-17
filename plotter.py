@@ -48,6 +48,11 @@ def windowInit():
     fen.rowconfigure(7,pad=20)
     fen.rowconfigure(8,pad=20)
     fen.rowconfigure(9,pad=20)
+    fen.rowconfigure(10,pad=20)
+    fen.rowconfigure(11,pad=20)
+    fen.rowconfigure(12,pad=20)
+    fen.rowconfigure(13,pad=20)
+    fen.rowconfigure(14,pad=20)
 
     myColor1 = '#78f8ff'
     myColor2 = '#78cbff'
@@ -83,33 +88,58 @@ def windowInit():
 
     funConsigne = Label(fen,text="Écrivez ici la fonction à afficher (sous le format y=f(x)) : ")
     funConsigne.configure(font=('Courrier',20),bg = myColor2)
-    funConsigne.grid(row=5,column = 0,columnspan=3,sticky=EW)
+    funConsigne.grid(row=5,column = 0,columnspan=2,sticky=EW)
    
     ylabel = Label(fen,text="f(x) = ")
     ylabel.configure(font=('Courrier',20))
-    ylabel.grid(row=6,column=0,columnspan=1,sticky=EW)
+    ylabel.grid(row=6,column=0,columnspan=1,sticky=W)
 
     funexpr = Entry(fen)
-    funexpr.grid(row=6,column=1,columnspan=2,sticky=EW)
+    funexpr.grid(row=6,column=1,columnspan=1,sticky=EW)
 
     absconsigne = Label(fen,text="Entrez les abscisses minimale et maximale : ")
     absconsigne.configure(font=('Courrier',20),bg=myColor3)
-    absconsigne.grid(row=7,column=0,columnspan=3,sticky=EW)
+    absconsigne.grid(row=7,column=0,columnspan=2,sticky=EW)
     
     absminlabel = Label(fen,text="abscisse minimale : ")
     absminlabel.configure(font=('Courrier',20))
-    absminlabel.grid(row=8,column=0,columnspan=1,sticky=EW)
+    absminlabel.grid(row=8,column=0,columnspan=1,sticky=W)
 
     absminexpr = Entry(fen)
-    absminexpr.grid(row=8,column=1,columnspan=2,sticky=EW)
+    absminexpr.grid(row=8,column=1,columnspan=1,sticky=EW)
 
     absmaxlabel = Label(fen,text="abscisse maximale : ")
     absmaxlabel.configure(font=('Courrier',20))
-    absmaxlabel.grid(row=9,column=0,columnspan=1,sticky=EW)
+    absmaxlabel.grid(row=9,column=0,columnspan=1,sticky=W)
 
     absmaxexpr = Entry(fen)
-    absmaxexpr.grid(row=9,column=1,columnspan=2,sticky=EW)
+    absmaxexpr.grid(row=9,column=1,columnspan=1,sticky=EW)
 
+    optconsigne = Label(fen,text="Options supplémentaires : ")
+    optconsigne.configure(font=('Courrier',20),bg=myColor4)
+    optconsigne.grid(row=10,column=0,columnspan=2,sticky=EW)
+    
+    titlelabel = Label(fen,text=("Titre : "))
+    titlelabel.configure(font=('Courrier',20))
+    titlelabel.grid(row=11,column=0,columnspan=1,sticky=W)
+
+    titleexpr = Entry(fen)
+    titleexpr.grid(row=11,column=1,columnspan=1,sticky=EW)
+
+    xlabel = Label(fen,text=("Nom de l'axe x : "))
+    xlabel.configure(font=('Courrier',20))
+    xlabel.grid(row=12,column=0,columnspan=1,sticky=W)
+
+    xlabelexpr = Entry(fen)
+    xlabelexpr.grid(row=12,column=1,columnspan=1,sticky=EW)
+
+    ylabel = Label(fen,text=("Nom de l'axe y : "))
+    ylabel.configure(font=('Courrier',20))
+    ylabel.grid(row=13,column=0,columnspan=1,sticky=W)
+
+    ylabelexpr = Entry(fen)
+    ylabelexpr.grid(row=13,column=1,columnspan=1,sticky=EW)
+    
     return fen
     
 def main():
