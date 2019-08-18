@@ -138,12 +138,17 @@ def windowInit():
     gridcheckbutton = Checkbutton(frame1,text="Afficher la grille",highlightthickness=0,bd=0)
     gridcheckbutton.configure(font=('Courrier',15),bg="white")
     gridcheckbutton.grid(row=9,column=1,columnspan=2,sticky=EW)
-   
-    plot=Button(frame1,text="Plot !")
-    plot.configure(font=('Courrier',15),bg = myColor4)
-    plot.grid(row=10,column=1,columnspan=1,sticky=W) 
 
-    clearall=Button(frame1,text="Effacer tout")
+    def clearall():
+        #ici aussi il faudrait appeler une fonction externe avec un tableau d'entries par exemple
+        funexpr.delete(0,'end')
+        absminexpr.delete(0,'end')
+        absmaxexpr.delete(0,'end')
+        titleexpr.delete(0,'end')
+        xlabelexpr.delete(0,'end')
+        ylabelexpr.delete(0,'end')
+
+    clearall=Button(frame1,text="Effacer tout",command=clearall)
     clearall.configure(font=('Courrier',15),bg=myColor4)
     clearall.grid(row=10,column=2,columnspan=1,sticky=E)
     
@@ -153,6 +158,17 @@ def windowInit():
     fig = Figure(figsize=(15,15))
     a = fig.add_subplot(111)
     
+    def plotting():
+        #temporairement
+        #le but serait d'appeler une fonction externe avec l'ensemble des paramètres pour alléger le code
+        a.set_title (titleexpr.get(), fontsize=16)
+        a.set_ylabel(ylabelexpr.get(), fontsize=14)
+        a.set_xlabel(xlabelexpr.get(), fontsize=14)
+
+    plot=Button(frame1,text="Plot !",command=plotting)
+    plot.configure(font=('Courrier',15),bg = myColor4)
+    plot.grid(row=10,column=1,columnspan=1,sticky=W)
+
     canvas = FigureCanvasTkAgg(fig,frame2)
     canvas.get_tk_widget().pack()
     canvas.draw()
