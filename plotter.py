@@ -40,43 +40,29 @@ def windowInit():
 
     frame0=Frame(fen)
     frame0.pack()
-    frame0.grid_columnconfigure(0)
-    frame0.grid_columnconfigure(1)
-    frame0.grid_columnconfigure(2)
-    frame0.grid_rowconfigure(0,pad=0)
-    frame0.grid_rowconfigure(1,pad=0)
-    frame0.grid_rowconfigure(2,pad=0)
-    frame0.grid_rowconfigure(3,pad=0)
-    frame0.grid_rowconfigure(4,pad=0)
-
-    barre1 = Label(frame0,text="")
-    barre1.configure(bg=myColor1,font=('Courrier',30))
-    barre1.grid(row=0,column=0,columnspan=1,sticky=EW)
-    barre2 = Label(frame0,text="")
-    barre2.configure(bg=myColor1,font=('Courrier',30))
-    barre2.grid(row=0,column=2,columnspan=1,sticky=EW)
-
+    
     title = Label(frame0,text="Plot")
     title.configure(font=('Courrier',30),bg=myColor1)
-    title.grid(row=0,column=1,columnspan = 1,sticky=EW)
+    title.pack(side=TOP,fill=X)
 
-    greatbarre1=Label(frame0,text="")
+    greatbarre1=Label(frame0,text="                                                                                                                                                                                                                                                                                                                                                 ")
     greatbarre1.configure(bg=myColor2,font=('Courrier',20))
-    greatbarre1.grid(row=1,column=0,columnspan=3,sticky=EW)
-    greatbarre2=Label(frame0,text="                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ")
+    greatbarre1.pack(side=TOP,fill=X)
+    
+    greatbarre2=Label(frame0,text="")
     greatbarre2.configure(bg=myColor3,font=('Courrier',10))
-    greatbarre2.grid(row=2,column=0,columnspan=3,sticky=EW)
+    greatbarre2.pack(side=TOP,fill=X)
 
     greatbarre3=Label(frame0,text="")
     greatbarre3.configure(bg=myColor4,font=('Courrier',5))
-    greatbarre3.grid(row=3,column=0,columnspan=3,sticky=EW)
+    greatbarre3.pack(side=TOP,fill=X)
 
     greatbarre4=Label(frame0,text="")
     greatbarre4.configure(bg=myColor5,font=('Courrier',2))
-    greatbarre4.grid(row=4,column=0,columnspan=3,sticky=EW)
+    greatbarre4.pack(side=TOP,fill=X)
 
     frame1=Frame(fen,bg="white")
-    frame1.pack(side=LEFT,fill=Y)
+    frame1.pack(side=LEFT,fill=BOTH,expand=1)
 
     frame1.grid_columnconfigure(0,weight=1)
     frame1.grid_columnconfigure(1,weight=1)
@@ -94,12 +80,6 @@ def windowInit():
     frame1.grid_rowconfigure(8,pad=20)
     frame1.grid_rowconfigure(9,pad=20)
     frame1.grid_rowconfigure(10,pad=20)
-    frame1.grid_rowconfigure(11,pad=20)
-    frame1.grid_rowconfigure(12,pad=20)
-    frame1.grid_rowconfigure(13,pad=20)
-    frame1.grid_rowconfigure(14,pad=20)
-    frame1.grid_rowconfigure(15,pad=20)
-    frame1.grid_rowconfigure(16,pad=20)
     
     funConsigne = Label(frame1,text="Écrivez ici la fonction à afficher (sous le format y=f(x)) : ")
     funConsigne.configure(font=('Courrier',15),bg = myColor1)
@@ -170,7 +150,7 @@ def windowInit():
     frame2=Frame(fen,bg="white")
     frame2.pack(fill=BOTH,expand=1)
 
-    fig = Figure(figsize=(10,10))
+    fig = Figure(figsize=(15,15))
     a = fig.add_subplot(111)
     
     canvas = FigureCanvasTkAgg(fig,frame2)
@@ -179,6 +159,12 @@ def windowInit():
 
     return fen
     
+
+
+
+
+
+
 def main():
     windowInit().mainloop()
 
