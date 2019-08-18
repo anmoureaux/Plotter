@@ -140,6 +140,10 @@ def windowInit():
     ylabelexpr = Entry(fen)
     ylabelexpr.grid(row=13,column=1,columnspan=1,sticky=EW)
     
+    gridcheckbutton = Checkbutton(fen,text="Afficher la grille")
+    gridcheckbutton.configure(font=('Courrier',20))
+    gridcheckbutton.grid(row=14,column=0,columnspan=2,sticky=EW)
+   
     return fen
     
 def main():
