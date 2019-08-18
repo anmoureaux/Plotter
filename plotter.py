@@ -158,12 +158,21 @@ def windowInit():
     canvas.draw()
 
     return fen
-    
 
+#retourne un tableau contenant toutes les variables entrées dans la fenêtre
+#def getData():
 
+#renvoit le vecteur y
+#def translate():
+ 
+#plot y avec les variables adéquates
+#def plot():
+ 
+#retourne les variables sur la fenêtre
+#def fetchData():
 
-
-
+#comportement de la fenêtre
+#windowBehavior():
 
 def main():
     windowInit().mainloop()
