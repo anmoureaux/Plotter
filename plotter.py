@@ -5,7 +5,10 @@
 
 
 import numpy as np
-import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use('TkAgg')
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from matplotlib.figure import Figure
 from tkinter import *
 
 
@@ -29,133 +32,151 @@ def windowInit():
             self._geom=geom
     app=FullScreenApp(fen)
 
-    
-    fen.columnconfigure(0)
-    fen.columnconfigure(1)
-    fen.columnconfigure(2)
-    fen.columnconfigure(3)
-    fen.columnconfigure(4)
-    fen.columnconfigure(5)
-    fen.columnconfigure(6)
-    fen.columnconfigure(7)
-    fen.columnconfigure(8)
-
-    fen.rowconfigure(0,pad=0)
-    fen.rowconfigure(1,pad=0)
-    fen.rowconfigure(2,pad=0)
-    fen.rowconfigure(3,pad=0)
-    fen.rowconfigure(4,pad=0)
-    fen.rowconfigure(5,pad=20)
-    fen.rowconfigure(6,pad=20)
-    fen.rowconfigure(7,pad=20)
-    fen.rowconfigure(8,pad=20)
-    fen.rowconfigure(9,pad=20)
-    fen.rowconfigure(10,pad=20)
-    fen.rowconfigure(11,pad=20)
-    fen.rowconfigure(12,pad=20)
-    fen.rowconfigure(13,pad=20)
-    fen.rowconfigure(14,pad=20)
-    fen.rowconfigure(15,pad=20)
-    fen.rowconfigure(16,pad=20)
-
     myColor1 = '#78f8ff'
     myColor2 = '#78cbff'
     myColor3 = '#75a1ff'
     myColor4 = '#7575ff'
     myColor5 = '#445CFF'
-    
-    barre1 = Label(fen,text="")
+
+    frame0=Frame(fen)
+    frame0.pack()
+    frame0.grid_columnconfigure(0)
+    frame0.grid_columnconfigure(1)
+    frame0.grid_columnconfigure(2)
+    frame0.grid_rowconfigure(0,pad=0)
+    frame0.grid_rowconfigure(1,pad=0)
+    frame0.grid_rowconfigure(2,pad=0)
+    frame0.grid_rowconfigure(3,pad=0)
+    frame0.grid_rowconfigure(4,pad=0)
+
+    barre1 = Label(frame0,text="")
     barre1.configure(bg=myColor1,font=('Courrier',30))
-    barre1.grid(row=0,column=0,columnspan=4,sticky=EW)
-    barre2 = Label(fen,text="")
+    barre1.grid(row=0,column=0,columnspan=1,sticky=EW)
+    barre2 = Label(frame0,text="")
     barre2.configure(bg=myColor1,font=('Courrier',30))
-    barre2.grid(row=0,column=5,columnspan=4,sticky=EW)
+    barre2.grid(row=0,column=2,columnspan=1,sticky=EW)
 
-    title = Label(fen,text="Plot")
+    title = Label(frame0,text="Plot")
     title.configure(font=('Courrier',30),bg=myColor1)
-    title.grid(row=0,column=4,columnspan = 1,sticky=EW)
+    title.grid(row=0,column=1,columnspan = 1,sticky=EW)
 
-    greatbarre1=Label(fen,text="")
+    greatbarre1=Label(frame0,text="")
     greatbarre1.configure(bg=myColor2,font=('Courrier',20))
-    greatbarre1.grid(row=1,column=0,columnspan=9,sticky=EW)
-    greatbarre2=Label(fen,text="                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ")
+    greatbarre1.grid(row=1,column=0,columnspan=3,sticky=EW)
+    greatbarre2=Label(frame0,text="                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ")
     greatbarre2.configure(bg=myColor3,font=('Courrier',10))
-    greatbarre2.grid(row=2,column=0,columnspan=9,sticky=EW)
+    greatbarre2.grid(row=2,column=0,columnspan=3,sticky=EW)
 
-    greatbarre3=Label(fen,text="")
+    greatbarre3=Label(frame0,text="")
     greatbarre3.configure(bg=myColor4,font=('Courrier',5))
-    greatbarre3.grid(row=3,column=0,columnspan=9,sticky=EW)
+    greatbarre3.grid(row=3,column=0,columnspan=3,sticky=EW)
 
-    greatbarre4=Label(fen,text="")
+    greatbarre4=Label(frame0,text="")
     greatbarre4.configure(bg=myColor5,font=('Courrier',2))
-    greatbarre4.grid(row=4,column=0,columnspan=9,sticky=EW)
+    greatbarre4.grid(row=4,column=0,columnspan=3,sticky=EW)
 
-    funConsigne = Label(fen,text="Écrivez ici la fonction à afficher (sous le format y=f(x)) : ")
+    frame1=Frame(fen,bg="white")
+    frame1.pack(side=LEFT,fill=Y)
+
+    frame1.grid_columnconfigure(0,weight=1)
+    frame1.grid_columnconfigure(1,weight=1)
+    frame1.grid_columnconfigure(2,weight=1)
+    frame1.grid_columnconfigure(3,weight=1)
+
+    frame1.grid_rowconfigure(0,pad=0)
+    frame1.grid_rowconfigure(1,pad=0)
+    frame1.grid_rowconfigure(2,pad=0)
+    frame1.grid_rowconfigure(3,pad=0)
+    frame1.grid_rowconfigure(4,pad=0)
+    frame1.grid_rowconfigure(5,pad=20)
+    frame1.grid_rowconfigure(6,pad=20)
+    frame1.grid_rowconfigure(7,pad=20)
+    frame1.grid_rowconfigure(8,pad=20)
+    frame1.grid_rowconfigure(9,pad=20)
+    frame1.grid_rowconfigure(10,pad=20)
+    frame1.grid_rowconfigure(11,pad=20)
+    frame1.grid_rowconfigure(12,pad=20)
+    frame1.grid_rowconfigure(13,pad=20)
+    frame1.grid_rowconfigure(14,pad=20)
+    frame1.grid_rowconfigure(15,pad=20)
+    frame1.grid_rowconfigure(16,pad=20)
+    
+    funConsigne = Label(frame1,text="Écrivez ici la fonction à afficher (sous le format y=f(x)) : ")
     funConsigne.configure(font=('Courrier',15),bg = myColor1)
-    funConsigne.grid(row=5,column = 0,columnspan=4,sticky=EW)
+    funConsigne.grid(row=0,column = 0,columnspan=4,sticky=EW)
    
-    fxlabel = Label(fen,text="f(x) = ")
-    fxlabel.configure(font=('Courrier',15))
-    fxlabel.grid(row=6,column=1,columnspan=1,sticky=E)
+    fxlabel = Label(frame1,text="f(x) = ")
+    fxlabel.configure(font=('Courrier',15),bg="white")
+    fxlabel.grid(row=1,column=1,columnspan=1,sticky=E)
 
-    funexpr = Entry(fen)
-    funexpr.grid(row=6,column=2,columnspan=1,sticky=W)
+    funexpr = Entry(frame1)
+    funexpr.grid(row=1,column=2,columnspan=1,sticky=W)
 
-    absconsigne = Label(fen,text="Entrez les abscisses minimale et maximale : ")
+    absconsigne = Label(frame1,text="Entrez les abscisses minimale et maximale : ")
     absconsigne.configure(font=('Courrier',15),bg=myColor2)
-    absconsigne.grid(row=7,column=0,columnspan=4,sticky=EW)
+    absconsigne.grid(row=2,column=0,columnspan=4,sticky=EW)
     
-    absminlabel = Label(fen,text="abscisse minimale : ")
-    absminlabel.configure(font=('Courrier',15))
-    absminlabel.grid(row=8,column=1,columnspan=1,sticky=E)
+    absminlabel = Label(frame1,text="abscisse minimale : ")
+    absminlabel.configure(font=('Courrier',15),bg="white")
+    absminlabel.grid(row=3,column=1,columnspan=1,sticky=E)
 
-    absminexpr = Entry(fen)
-    absminexpr.grid(row=8,column=2,columnspan=1,sticky=W)
+    absminexpr = Entry(frame1)
+    absminexpr.grid(row=3,column=2,columnspan=1,sticky=W)
 
-    absmaxlabel = Label(fen,text="abscisse maximale : ")
-    absmaxlabel.configure(font=('Courrier',15))
-    absmaxlabel.grid(row=9,column=1,columnspan=1,sticky=E)
+    absmaxlabel = Label(frame1,text="abscisse maximale : ")
+    absmaxlabel.configure(font=('Courrier',15),bg="white")
+    absmaxlabel.grid(row=4,column=1,columnspan=1,sticky=E)
 
-    absmaxexpr = Entry(fen)
-    absmaxexpr.grid(row=9,column=2,columnspan=1,sticky=W)
+    absmaxexpr = Entry(frame1)
+    absmaxexpr.grid(row=4,column=2,columnspan=1,sticky=W)
 
-    optconsigne = Label(fen,text="Options supplémentaires : ")
+    optconsigne = Label(frame1,text="Options supplémentaires : ")
     optconsigne.configure(font=('Courrier',15),bg=myColor3)
-    optconsigne.grid(row=10,column=0,columnspan=4,sticky=EW)
+    optconsigne.grid(row=5,column=0,columnspan=4,sticky=EW)
     
-    titlelabel = Label(fen,text=("Titre : "))
-    titlelabel.configure(font=('Courrier',15))
-    titlelabel.grid(row=11,column=1,columnspan=1,sticky=E)
+    titlelabel = Label(frame1,text=("Titre : "))
+    titlelabel.configure(font=('Courrier',15),bg="white")
+    titlelabel.grid(row=6,column=1,columnspan=1,sticky=E)
 
-    titleexpr = Entry(fen)
-    titleexpr.grid(row=11,column=2,columnspan=1,sticky=W)
+    titleexpr = Entry(frame1)
+    titleexpr.grid(row=6,column=2,columnspan=1,sticky=W)
 
-    xlabel = Label(fen,text=("Nom de l'axe x : "))
-    xlabel.configure(font=('Courrier',15))
-    xlabel.grid(row=12,column=1,columnspan=1,sticky=E)
+    xlabel = Label(frame1,text=("Nom de l'axe x : "))
+    xlabel.configure(font=('Courrier',15),bg="white")
+    xlabel.grid(row=7,column=1,columnspan=1,sticky=E)
 
-    xlabelexpr = Entry(fen)
-    xlabelexpr.grid(row=12,column=2,columnspan=1,sticky=W)
+    xlabelexpr = Entry(frame1)
+    xlabelexpr.grid(row=7,column=2,columnspan=1,sticky=W)
 
-    ylabel = Label(fen,text=("Nom de l'axe y : "))
-    ylabel.configure(font=('Courrier',15))
-    ylabel.grid(row=13,column=1,columnspan=1,sticky=E)
+    ylabel = Label(frame1,text=("Nom de l'axe y : "))
+    ylabel.configure(font=('Courrier',15),bg="white")
+    ylabel.grid(row=8,column=1,columnspan=1,sticky=E)
 
-    ylabelexpr = Entry(fen)
-    ylabelexpr.grid(row=13,column=2,columnspan=1,sticky=W)
+    ylabelexpr = Entry(frame1)
+    ylabelexpr.grid(row=8,column=2,columnspan=1,sticky=W)
     
-    gridcheckbutton = Checkbutton(fen,text="Afficher la grille")
-    gridcheckbutton.configure(font=('Courrier',15))
-    gridcheckbutton.grid(row=14,column=1,columnspan=2,sticky=EW)
+    gridcheckbutton = Checkbutton(frame1,text="Afficher la grille",highlightthickness=0,bd=0)
+    gridcheckbutton.configure(font=('Courrier',15),bg="white")
+    gridcheckbutton.grid(row=9,column=1,columnspan=2,sticky=EW)
    
-    plot=Button(fen,text="Plot !")
+    plot=Button(frame1,text="Plot !")
     plot.configure(font=('Courrier',15),bg = myColor4)
-    plot.grid(row=15,column=1,columnspan=1,sticky=W) 
+    plot.grid(row=10,column=1,columnspan=1,sticky=W) 
 
-    clearall=Button(fen,text="Effacer tout")
+    clearall=Button(frame1,text="Effacer tout")
     clearall.configure(font=('Courrier',15),bg=myColor4)
-    clearall.grid(row=15,column=2,columnspan=1,sticky=E)
+    clearall.grid(row=10,column=2,columnspan=1,sticky=E)
     
+    frame2=Frame(fen,bg="white")
+    frame2.pack(fill=BOTH,expand=1)
+
+    fig = Figure(figsize=(10,10))
+    a = fig.add_subplot(111)
+    
+    canvas = FigureCanvasTkAgg(fig,frame2)
+    canvas.get_tk_widget().pack()
+    canvas.draw()
+
     return fen
     
 def main():
