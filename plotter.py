@@ -37,6 +37,8 @@ def windowInit():
     fen.columnconfigure(4)
     fen.columnconfigure(5)
     fen.columnconfigure(6)
+    fen.columnconfigure(7)
+    fen.columnconfigure(8)
 
     fen.rowconfigure(0,pad=0)
     fen.rowconfigure(1,pad=0)
@@ -53,6 +55,8 @@ def windowInit():
     fen.rowconfigure(12,pad=20)
     fen.rowconfigure(13,pad=20)
     fen.rowconfigure(14,pad=20)
+    fen.rowconfigure(15,pad=20)
+    fen.rowconfigure(16,pad=20)
 
     myColor1 = '#78f8ff'
     myColor2 = '#78cbff'
@@ -62,88 +66,96 @@ def windowInit():
     
     barre1 = Label(fen,text="")
     barre1.configure(bg=myColor1,font=('Courrier',30))
-    barre1.grid(row=0,column=0,columnspan=3,sticky=EW)
+    barre1.grid(row=0,column=0,columnspan=4,sticky=EW)
     barre2 = Label(fen,text="")
     barre2.configure(bg=myColor1,font=('Courrier',30))
-    barre2.grid(row=0,column=3,columnspan=4,sticky=EW)
+    barre2.grid(row=0,column=5,columnspan=4,sticky=EW)
 
     title = Label(fen,text="Plot")
     title.configure(font=('Courrier',30),bg=myColor1)
-    title.grid(row=0,column=0,columnspan = 7,sticky=EW)
+    title.grid(row=0,column=4,columnspan = 1,sticky=EW)
 
     greatbarre1=Label(fen,text="")
     greatbarre1.configure(bg=myColor2,font=('Courrier',20))
-    greatbarre1.grid(row=1,column=0,columnspan=7,sticky=EW)
+    greatbarre1.grid(row=1,column=0,columnspan=9,sticky=EW)
     greatbarre2=Label(fen,text="                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ")
     greatbarre2.configure(bg=myColor3,font=('Courrier',10))
-    greatbarre2.grid(row=2,column=0,columnspan=7,sticky=EW)
+    greatbarre2.grid(row=2,column=0,columnspan=9,sticky=EW)
 
     greatbarre3=Label(fen,text="")
     greatbarre3.configure(bg=myColor4,font=('Courrier',5))
-    greatbarre3.grid(row=3,column=0,columnspan=7,sticky=EW)
+    greatbarre3.grid(row=3,column=0,columnspan=9,sticky=EW)
 
     greatbarre4=Label(fen,text="")
     greatbarre4.configure(bg=myColor5,font=('Courrier',2))
-    greatbarre4.grid(row=4,column=0,columnspan=7,sticky=EW)
+    greatbarre4.grid(row=4,column=0,columnspan=9,sticky=EW)
 
     funConsigne = Label(fen,text="Écrivez ici la fonction à afficher (sous le format y=f(x)) : ")
-    funConsigne.configure(font=('Courrier',20),bg = myColor2)
-    funConsigne.grid(row=5,column = 0,columnspan=2,sticky=EW)
+    funConsigne.configure(font=('Courrier',15),bg = myColor1)
+    funConsigne.grid(row=5,column = 0,columnspan=4,sticky=EW)
    
-    ylabel = Label(fen,text="f(x) = ")
-    ylabel.configure(font=('Courrier',20))
-    ylabel.grid(row=6,column=0,columnspan=1,sticky=W)
+    fxlabel = Label(fen,text="f(x) = ")
+    fxlabel.configure(font=('Courrier',15))
+    fxlabel.grid(row=6,column=1,columnspan=1,sticky=E)
 
     funexpr = Entry(fen)
-    funexpr.grid(row=6,column=1,columnspan=1,sticky=EW)
+    funexpr.grid(row=6,column=2,columnspan=1,sticky=W)
 
     absconsigne = Label(fen,text="Entrez les abscisses minimale et maximale : ")
-    absconsigne.configure(font=('Courrier',20),bg=myColor3)
-    absconsigne.grid(row=7,column=0,columnspan=2,sticky=EW)
+    absconsigne.configure(font=('Courrier',15),bg=myColor2)
+    absconsigne.grid(row=7,column=0,columnspan=4,sticky=EW)
     
     absminlabel = Label(fen,text="abscisse minimale : ")
-    absminlabel.configure(font=('Courrier',20))
-    absminlabel.grid(row=8,column=0,columnspan=1,sticky=W)
+    absminlabel.configure(font=('Courrier',15))
+    absminlabel.grid(row=8,column=1,columnspan=1,sticky=E)
 
     absminexpr = Entry(fen)
-    absminexpr.grid(row=8,column=1,columnspan=1,sticky=EW)
+    absminexpr.grid(row=8,column=2,columnspan=1,sticky=W)
 
     absmaxlabel = Label(fen,text="abscisse maximale : ")
-    absmaxlabel.configure(font=('Courrier',20))
-    absmaxlabel.grid(row=9,column=0,columnspan=1,sticky=W)
+    absmaxlabel.configure(font=('Courrier',15))
+    absmaxlabel.grid(row=9,column=1,columnspan=1,sticky=E)
 
     absmaxexpr = Entry(fen)
-    absmaxexpr.grid(row=9,column=1,columnspan=1,sticky=EW)
+    absmaxexpr.grid(row=9,column=2,columnspan=1,sticky=W)
 
     optconsigne = Label(fen,text="Options supplémentaires : ")
-    optconsigne.configure(font=('Courrier',20),bg=myColor4)
-    optconsigne.grid(row=10,column=0,columnspan=2,sticky=EW)
+    optconsigne.configure(font=('Courrier',15),bg=myColor3)
+    optconsigne.grid(row=10,column=0,columnspan=4,sticky=EW)
     
     titlelabel = Label(fen,text=("Titre : "))
-    titlelabel.configure(font=('Courrier',20))
-    titlelabel.grid(row=11,column=0,columnspan=1,sticky=W)
+    titlelabel.configure(font=('Courrier',15))
+    titlelabel.grid(row=11,column=1,columnspan=1,sticky=E)
 
     titleexpr = Entry(fen)
-    titleexpr.grid(row=11,column=1,columnspan=1,sticky=EW)
+    titleexpr.grid(row=11,column=2,columnspan=1,sticky=W)
 
     xlabel = Label(fen,text=("Nom de l'axe x : "))
-    xlabel.configure(font=('Courrier',20))
-    xlabel.grid(row=12,column=0,columnspan=1,sticky=W)
+    xlabel.configure(font=('Courrier',15))
+    xlabel.grid(row=12,column=1,columnspan=1,sticky=E)
 
     xlabelexpr = Entry(fen)
-    xlabelexpr.grid(row=12,column=1,columnspan=1,sticky=EW)
+    xlabelexpr.grid(row=12,column=2,columnspan=1,sticky=W)
 
     ylabel = Label(fen,text=("Nom de l'axe y : "))
-    ylabel.configure(font=('Courrier',20))
-    ylabel.grid(row=13,column=0,columnspan=1,sticky=W)
+    ylabel.configure(font=('Courrier',15))
+    ylabel.grid(row=13,column=1,columnspan=1,sticky=E)
 
     ylabelexpr = Entry(fen)
-    ylabelexpr.grid(row=13,column=1,columnspan=1,sticky=EW)
+    ylabelexpr.grid(row=13,column=2,columnspan=1,sticky=W)
     
     gridcheckbutton = Checkbutton(fen,text="Afficher la grille")
-    gridcheckbutton.configure(font=('Courrier',20))
-    gridcheckbutton.grid(row=14,column=0,columnspan=2,sticky=EW)
+    gridcheckbutton.configure(font=('Courrier',15))
+    gridcheckbutton.grid(row=14,column=1,columnspan=2,sticky=EW)
    
+    plot=Button(fen,text="Plot !")
+    plot.configure(font=('Courrier',15),bg = myColor4)
+    plot.grid(row=15,column=1,columnspan=1,sticky=W) 
+
+    clearall=Button(fen,text="Effacer tout")
+    clearall.configure(font=('Courrier',15),bg=myColor4)
+    clearall.grid(row=15,column=2,columnspan=1,sticky=E)
+    
     return fen
     
 def main():
