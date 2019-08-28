@@ -140,20 +140,7 @@ def windowInit():
     gridcheckbutton = Checkbutton(frame1,text="Afficher la grille",highlightthickness=0,bd=0)
     gridcheckbutton.configure(font=('Courrier',15),bg="white")
     gridcheckbutton.grid(row=9,column=1,columnspan=2,sticky=EW)
-
-    def clearall():
-        #ici aussi il faudrait appeler une fonction externe avec un tableau d'entries par exemple
-        funexpr.delete(0,'end')
-        absminexpr.delete(0,'end')
-        absmaxexpr.delete(0,'end')
-        titleexpr.delete(0,'end')
-        xlabelexpr.delete(0,'end')
-        ylabelexpr.delete(0,'end')
-
-    clearall=Button(frame1,text="Effacer tout",command=clearall)
-    clearall.configure(font=('Courrier',15),bg=myColor4)
-    clearall.grid(row=10,column=2,columnspan=1,sticky=E)
-    
+   
     frame2=Frame(fen,bg="white")
     frame2.pack(fill=BOTH,expand=1)
 
@@ -173,13 +160,28 @@ def windowInit():
         #le but serait d'appeler une fonction externe avec l'ensemble des paramètres pour alléger le code
         a.plot([1,2,3,4,5,6],[5,3,6,7,2,1])
         a.set_title(titleexpr.get())
+        a.set_ylabel(ylabelexpr.get())
+        a.set_xlabel(xlabelexpr.get())
         canvas.draw()
 
     plot=Button(frame1,text="Plot !",command=plotting)
     plot.configure(font=('Courrier',15),bg = myColor4)
     plot.grid(row=10,column=1,columnspan=1,sticky=W)
         
+    def clearall():
+        #ici aussi il faudrait appeler une fonction externe avec un tableau d'entries par exemple
+        funexpr.delete(0,'end')
+        absminexpr.delete(0,'end')
+        absmaxexpr.delete(0,'end')
+        titleexpr.delete(0,'end')
+        xlabelexpr.delete(0,'end')
+        ylabelexpr.delete(0,'end')
+        a.clear()
+        canvas.draw()
 
+    clearall=Button(frame1,text="Effacer tout",command=clearall)
+    clearall.configure(font=('Courrier',15),bg=myColor4)
+    clearall.grid(row=10,column=2,columnspan=1,sticky=E)
 
     return fen
 
