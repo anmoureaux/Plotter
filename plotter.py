@@ -172,6 +172,7 @@ def windowInit():
         #temporairement
         #le but serait d'appeler une fonction externe avec l'ensemble des paramètres pour alléger le code
         a.plot([1,2,3,4,5,6],[5,3,6,7,2,1])
+        a.set_title(titleexpr.get())
         canvas.draw()
 
     plot=Button(frame1,text="Plot !",command=plotting)
