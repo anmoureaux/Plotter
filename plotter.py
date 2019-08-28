@@ -156,12 +156,16 @@ def windowInit():
     canvas._tkcanvas.pack(side=TOP)
     
     def plotting():
+        #TODO
         #temporairement
         #le but serait d'appeler une fonction externe avec l'ensemble des paramètres pour alléger le code
         a.plot([1,2,3,4,5,6],[5,3,6,7,2,1])
         a.set_title(titleexpr.get())
         a.set_ylabel(ylabelexpr.get())
         a.set_xlabel(xlabelexpr.get())
+        if (absminexpr.get() != "") and (absmaxexpr.get() != "") : 
+            #TODO gérer les ordonnées
+            a.set_xlim([float(absminexpr.get()),float(absmaxexpr.get())])
         canvas.draw()
 
     plot=Button(frame1,text="Plot !",command=plotting)
@@ -169,6 +173,7 @@ def windowInit():
     plot.grid(row=10,column=1,columnspan=1,sticky=W)
         
     def clearall():
+        #TODO
         #ici aussi il faudrait appeler une fonction externe avec un tableau d'entries par exemple
         funexpr.delete(0,'end')
         absminexpr.delete(0,'end')
