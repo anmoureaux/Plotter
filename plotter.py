@@ -7,8 +7,10 @@
 import numpy as np
 import matplotlib
 matplotlib.use('TkAgg')
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from matplotlib.figure import Figure
+import matplotlib.pyplot as plt
+
 from tkinter import *
 
 
@@ -155,23 +157,28 @@ def windowInit():
     frame2=Frame(fen,bg="white")
     frame2.pack(fill=BOTH,expand=1)
 
-    fig = Figure(figsize=(15,15))
+    fig = Figure(figsize=(15,8))
     a = fig.add_subplot(111)
+
+    canvas = FigureCanvasTkAgg(fig,frame2)
+    canvas.draw()
+    canvas.get_tk_widget().pack(side=BOTTOM, fill=BOTH, expand=True)
+
+    toolbar = NavigationToolbar2Tk(canvas, frame2)
+    toolbar.update()
+    canvas._tkcanvas.pack(side=TOP)
     
     def plotting():
         #temporairement
         #le but serait d'appeler une fonction externe avec l'ensemble des paramètres pour alléger le code
-        a.set_title (titleexpr.get(), fontsize=16)
-        a.set_ylabel(ylabelexpr.get(), fontsize=14)
-        a.set_xlabel(xlabelexpr.get(), fontsize=14)
+        a.plot([1,2,3,4,5,6],[5,3,6,7,2,1])
+        canvas.draw()
 
     plot=Button(frame1,text="Plot !",command=plotting)
     plot.configure(font=('Courrier',15),bg = myColor4)
     plot.grid(row=10,column=1,columnspan=1,sticky=W)
+        
 
-    canvas = FigureCanvasTkAgg(fig,frame2)
-    canvas.get_tk_widget().pack()
-    canvas.draw()
 
     return fen
 
