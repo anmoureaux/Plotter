@@ -174,15 +174,15 @@ def windowInit():
     var = IntVar()
     gridcheckbutton = Checkbutton(frame1,text="Afficher la grille",highlightthickness=0,bd=0,variable=var)
     
-    approxlabel = Label(frame1,text="Ajouter une approximation : ",
+    approxlabel = Label(frame1,text="Ajouter une approximation (degré) : ",
             font="Courrier 15",
             fg="black",
             bg="white")
     approxlabel.grid(row=14,column=1,columnspan=1,sticky=E)
 
     approxvariable = StringVar(frame1)
-    approxvariable.set("linéaire")
-    approxmenu = OptionMenu(frame1,approxvariable,"linéaire","quadratique","cubique")
+    approxvariable.set("/")
+    approxmenu = OptionMenu(frame1,approxvariable,"/","0","1","2","3","4","5","6","7","8","9","10")
     approxmenu.config(font=('courrier',(10)),bg='white')
     approxmenu.grid(row=14,column=2,columnspan=1,sticky=W)
 
@@ -259,12 +259,13 @@ def windowInit():
                 elif var.get()==0 : 
                     a.grid(False)
                 canvas.draw()
-                if(approxvariable.get()=="linéaire"):
-                    slope, intercept, r_value, p_value, std_err = stats.linregress(x,y)
-                    a.plot(x,np.polyval([slope,intercept],x),'b--')
+                if(approxvariable.get()!="/"):
+                    deg = int(approxvariable.get())
+                    xabs=np.linspace(x[0],x[-1],1000)
+                    z = np.polyfit(x, y, deg)
+                    a.plot(xabs,np.polyval(z,xabs),'b--')
                     canvas.draw()
-                        
-                
+
     plot=Button(frame1,text="Plot !",command=plotting)
     plot.configure(font=('Courrier',15),bg = myColor4)
     plot.grid(row=16,column=1,columnspan=1,sticky=EW)
