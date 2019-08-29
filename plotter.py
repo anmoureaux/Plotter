@@ -12,6 +12,7 @@ from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
 from tkinter import *
 import scipy.stats as stats
+from scipy.interpolate import CubicSpline as spline
 
 
 #initialisation de la fenêtre et de ses composantes
@@ -88,6 +89,7 @@ def windowInit():
     frame1.grid_rowconfigure(14,pad=20)
     frame1.grid_rowconfigure(15,pad=20)
     frame1.grid_rowconfigure(16,pad=20)
+    frame1.grid_rowconfigure(17,pad=20)
 
     funConsigne = Label(frame1,text="Écrivez ici les données à afficher : ")
     funConsigne.configure(font=('Courrier',15),bg = myColor1)
@@ -186,8 +188,20 @@ def windowInit():
     approxmenu.config(font=('courrier',(10)),bg='white')
     approxmenu.grid(row=14,column=2,columnspan=1,sticky=W)
 
+    interplabel = Label(frame1,text="Ajouter une interpolation : ",
+            font="Courrier 15",
+            fg="black",
+            bg="white")
+    interplabel.grid(row=15,column=1,columnspan=1,sticky=E)
+    
+    interpvariable = StringVar(frame1)
+    interpvariable.set("aucune")
+    interpmenu = OptionMenu(frame1,interpvariable,"aucune","linéaire par morceaux","splines cubiques", "degré n")
+    interpmenu.config(font=('courrier',(10)),bg='white')
+    interpmenu.grid(row=15,column=2,columnspan=1,sticky=W)
+
     gridcheckbutton.configure(font=('Courrier',15),bg="white")
-    gridcheckbutton.grid(row=15,column=1,columnspan=2,sticky=EW)
+    gridcheckbutton.grid(row=16,column=1,columnspan=2,sticky=EW)
    
     frame2=Frame(fen,bg="white")
     frame2.pack(fill=BOTH,expand=1)
@@ -265,10 +279,24 @@ def windowInit():
                     z = np.polyfit(x, y, deg)
                     a.plot(xabs,np.polyval(z,xabs),'b--')
                     canvas.draw()
+                if(interpvariable.get()!="aucune"):
+                    if(interpvariable.get()=="linéaire par morceaux"):
+                        a.plot(x,y,'b--')
+                        canvas.draw()
+                    if(interpvariable.get()=="splines cubiques"):
+                        xabs=np.linspace(x[0],x[-1],1000)
+                        u = spline(x,y)(xabs)
+                        a.plot(xabs,u,'b--')
+                        canvas.draw()
+                    if(interpvariable.get()=="degré n"):
+                        xabs=np.linspace(x[0],x[-1],1000)
+                        u = np.polyfit(x,y,len(x)-1)
+                        a.plot(xabs,np.polyval(u,xabs),'--b')
+                        canvas.draw()
 
     plot=Button(frame1,text="Plot !",command=plotting)
     plot.configure(font=('Courrier',15),bg = myColor4)
-    plot.grid(row=16,column=1,columnspan=1,sticky=EW)
+    plot.grid(row=17,column=1,columnspan=1,sticky=EW)
         
     def clearall():
         absexpr.delete(0,'end')
@@ -281,12 +309,14 @@ def windowInit():
         error.configure(fg="white")
         moreConsigne1.configure(font="Courrier 10 italic",fg="black")
         moreConsigne2.configure(font="Courrier 10 italic",fg="black")
+        approxvariable.set("/")
+        interpvariable.set("aucune")
         a.clear()
         canvas.draw()
 
     clearall=Button(frame1,text="Effacer tout",command=clearall)
     clearall.configure(font=('Courrier',15),bg=myColor4)
-    clearall.grid(row=16,column=2,columnspan=1,sticky=EW)
+    clearall.grid(row=17,column=2,columnspan=1,sticky=EW)
 
     return fen
 
