@@ -69,139 +69,144 @@ def windowInit():
 
     frame1.grid_columnconfigure(0,weight=1)
     frame1.grid_columnconfigure(1,weight=1)
-    frame1.grid_columnconfigure(2,weight=1)
-    frame1.grid_columnconfigure(3,weight=1)
 
     frame1.grid_rowconfigure(0,pad=0)
     frame1.grid_rowconfigure(1,pad=0)
     frame1.grid_rowconfigure(2,pad=0)
     frame1.grid_rowconfigure(3,pad=0)
     frame1.grid_rowconfigure(4,pad=0)
-    frame1.grid_rowconfigure(5,pad=20)
-    frame1.grid_rowconfigure(6,pad=20)
-    frame1.grid_rowconfigure(7,pad=20)
+    frame1.grid_rowconfigure(5,pad=0)
+    frame1.grid_rowconfigure(6,pad=0)
+    frame1.grid_rowconfigure(7,pad=0)
     frame1.grid_rowconfigure(8,pad=20)
-    frame1.grid_rowconfigure(9,pad=20)
-    frame1.grid_rowconfigure(10,pad=20)
+    frame1.grid_rowconfigure(9,pad=0)
+    frame1.grid_rowconfigure(10,pad=0)
     frame1.grid_rowconfigure(11,pad=20)
-    frame1.grid_rowconfigure(12,pad=20)
-    frame1.grid_rowconfigure(13,pad=20)
-    frame1.grid_rowconfigure(14,pad=20)
+    frame1.grid_rowconfigure(12,pad=0)
+    frame1.grid_rowconfigure(13,pad=0)
+    frame1.grid_rowconfigure(14,pad=0)
     frame1.grid_rowconfigure(15,pad=20)
     frame1.grid_rowconfigure(16,pad=20)
     frame1.grid_rowconfigure(17,pad=20)
+    frame1.grid_rowconfigure(18,pad=20)
 
     funConsigne = Label(frame1,text="Écrivez ici les données à afficher : ")
     funConsigne.configure(font=('Courrier',15),bg = myColor1)
-    funConsigne.grid(row=0,column = 0,columnspan=4,sticky=EW)
+    funConsigne.grid(row=0,column = 0,columnspan=2,sticky=EW)
 
     moreConsigne1 = Label(frame1,text="Les deux vecteurs doivent être de la même taille.",
             font = "Courrier 10 italic",
             bg = "white")
-    moreConsigne1.grid(row=1,column = 0,columnspan=4,sticky=W)
+    moreConsigne1.grid(row=1,column = 0,columnspan=1,sticky=W)
 
     moreConsigne2 = Label(frame1,text="Le vecteur des abscisses doit être dans l'ordre croissant.",
             font = "Courrier 10 italic",
             bg= "white")
-    moreConsigne2.grid(row=2,column = 0,columnspan=4,sticky=W)
+    moreConsigne2.grid(row=2,column = 0,columnspan=1,sticky=W)
 
     exemple = Label(frame1,text="EXEMPLE : 0.5;2.0;1.97;3.03",
             font = "Courrier 10 bold",
             bg = "white")
-    exemple.grid(row=3,column = 0,columnspan=4,sticky=W)
+    exemple.grid(row=3,column = 0,columnspan=1,sticky=W)
    
     abslabel = Label(frame1,text="Abscisses : ")
     abslabel.configure(font=('Courrier',15),bg="white")
-    abslabel.grid(row=4,column=1,columnspan=1,sticky=E)
+    abslabel.grid(row=4,column=0,columnspan=1,sticky=E)
 
     absexpr = Entry(frame1)
-    absexpr.grid(row=4,column=2,columnspan=1,sticky=EW)
+    absexpr.grid(row=4,column=1,columnspan=1,sticky=EW)
 
     ordlabel = Label(frame1,text="Ordonnées : ")
     ordlabel.configure(font=('Courrier',15),bg="white")
-    ordlabel.grid(row=5,column=1,columnspan=1,sticky=E)
+    ordlabel.grid(row=5,column=0,columnspan=1,sticky=E)
 
     ordexpr = Entry(frame1)
-    ordexpr.grid(row=5,column=2,columnspan=1,sticky=EW)
+    ordexpr.grid(row=5,column=1,columnspan=1,sticky=EW)
 
-    error = Label(frame1,text="Il semblerait que vous ayez entré un caractère non pris en charge. Seuls les chiffres, les '.' et les ';' sont autorisés.",
+    error1 = Label(frame1,text="Il semblerait que vous ayez entré un caractère non pris en charge.",
             font="Courrier 9 bold italic",
             bg="white",
             fg="white")
-    error.grid(row=6,column=1,columnspan=2,sticky=W)
+    error1.grid(row=6,column=0,columnspan=2,sticky=W)
     
+    error2 = Label(frame1,text="Seuls les chiffres, les '.' et les ';' sont autorisés",
+            font="Courrier 9 bold italic",
+            bg="white",
+            fg="white")
+    error2.grid(row=7,column=0,columnspan=2,sticky=W)
+
     absconsigne = Label(frame1,text="Entrez les abscisses minimale et maximale : ")
     absconsigne.configure(font=('Courrier',15),bg=myColor2)
-    absconsigne.grid(row=7,column=0,columnspan=4,sticky=EW)
+    absconsigne.grid(row=8,column=0,columnspan=2,sticky=EW)
     
     absminlabel = Label(frame1,text="abscisse minimale : ")
     absminlabel.configure(font=('Courrier',15),bg="white")
-    absminlabel.grid(row=8,column=1,columnspan=1,sticky=E)
+    absminlabel.grid(row=9,column=0,columnspan=1,sticky=E)
 
     absminexpr = Entry(frame1)
-    absminexpr.grid(row=8,column=2,columnspan=1,sticky=W)
+    absminexpr.grid(row=9,column=1,columnspan=1,sticky=W)
 
     absmaxlabel = Label(frame1,text="abscisse maximale : ")
     absmaxlabel.configure(font=('Courrier',15),bg="white")
-    absmaxlabel.grid(row=9,column=1,columnspan=1,sticky=E)
+    absmaxlabel.grid(row=10,column=0,columnspan=1,sticky=E)
 
     absmaxexpr = Entry(frame1)
-    absmaxexpr.grid(row=9,column=2,columnspan=1,sticky=W)
+    absmaxexpr.grid(row=10,column=1,columnspan=1,sticky=W)
 
     optconsigne = Label(frame1,text="Options supplémentaires : ")
     optconsigne.configure(font=('Courrier',15),bg=myColor3)
-    optconsigne.grid(row=10,column=0,columnspan=4,sticky=EW)
+    optconsigne.grid(row=11,column=0,columnspan=2,sticky=EW)
     
     titlelabel = Label(frame1,text=("Titre : "))
     titlelabel.configure(font=('Courrier',15),bg="white")
-    titlelabel.grid(row=11,column=1,columnspan=1,sticky=E)
+    titlelabel.grid(row=12,column=0,columnspan=1,sticky=E)
 
     titleexpr = Entry(frame1)
-    titleexpr.grid(row=11,column=2,columnspan=1,sticky=W)
+    titleexpr.grid(row=12,column=1,columnspan=1,sticky=W)
 
     xlabel = Label(frame1,text=("Nom de l'axe x : "))
     xlabel.configure(font=('Courrier',15),bg="white")
-    xlabel.grid(row=12,column=1,columnspan=1,sticky=E)
+    xlabel.grid(row=13,column=0,columnspan=1,sticky=E)
 
     xlabelexpr = Entry(frame1)
-    xlabelexpr.grid(row=12,column=2,columnspan=1,sticky=W)
+    xlabelexpr.grid(row=13,column=1,columnspan=1,sticky=W)
 
     ylabel = Label(frame1,text=("Nom de l'axe y : "))
     ylabel.configure(font=('Courrier',15),bg="white")
-    ylabel.grid(row=13,column=1,columnspan=1,sticky=E)
+    ylabel.grid(row=14,column=0,columnspan=1,sticky=E)
 
     ylabelexpr = Entry(frame1)
-    ylabelexpr.grid(row=13,column=2,columnspan=1,sticky=W)
-    
-    var = IntVar()
-    gridcheckbutton = Checkbutton(frame1,text="Afficher la grille",highlightthickness=0,bd=0,variable=var)
+    ylabelexpr.grid(row=14,column=1,columnspan=1,sticky=W)
     
     approxlabel = Label(frame1,text="Ajouter une approximation (degré) : ",
             font="Courrier 15",
             fg="black",
             bg="white")
-    approxlabel.grid(row=14,column=1,columnspan=1,sticky=E)
-
+    approxlabel.grid(row=15,column=0,columnspan=1,sticky=E)
+    
     approxvariable = StringVar(frame1)
     approxvariable.set("/")
     approxmenu = OptionMenu(frame1,approxvariable,"/","0","1","2","3","4","5","6","7","8","9","10")
     approxmenu.config(font=('courrier',(10)),bg='white')
-    approxmenu.grid(row=14,column=2,columnspan=1,sticky=W)
-
+    approxmenu.grid(row=15,column=1,columnspan=1,sticky=W)
+    
     interplabel = Label(frame1,text="Ajouter une interpolation : ",
             font="Courrier 15",
             fg="black",
             bg="white")
-    interplabel.grid(row=15,column=1,columnspan=1,sticky=E)
+    interplabel.grid(row=16,column=0,columnspan=1,sticky=E)
     
     interpvariable = StringVar(frame1)
     interpvariable.set("aucune")
     interpmenu = OptionMenu(frame1,interpvariable,"aucune","linéaire par morceaux","splines cubiques", "degré n")
     interpmenu.config(font=('courrier',(10)),bg='white')
-    interpmenu.grid(row=15,column=2,columnspan=1,sticky=W)
+    interpmenu.grid(row=16,column=1,columnspan=1,sticky=W)
+
+    var = IntVar()
+    gridcheckbutton = Checkbutton(frame1,text="Afficher la grille",highlightthickness=0,bd=0,variable=var)
 
     gridcheckbutton.configure(font=('Courrier',15),bg="white")
-    gridcheckbutton.grid(row=16,column=1,columnspan=2,sticky=EW)
+    gridcheckbutton.grid(row=17,column=0,columnspan=2,sticky=EW)
    
     frame2=Frame(fen,bg="white")
     frame2.pack(fill=BOTH,expand=1)
@@ -218,12 +223,13 @@ def windowInit():
     canvas._tkcanvas.pack(side=TOP)
     
     def vector(string):
-        error.configure(fg="white")
+        error1.configure(fg="white")
+        error2.configure(fg="white")
         count = 0
         for i in range(0,len(string)):
             if(string[i] != ';') and (string[i].isdigit() == False) and (string[i] != '.'):
-                error.configure(fg="red")
-                return 0
+                error1.configure(fg="red")
+                error2.configure(fg="red")
             if(string[i] == ';'):
                 count=count+1
         x=np.zeros(count+1)
@@ -241,7 +247,7 @@ def windowInit():
         return x
 
     def isSorted(x):
-        return np.all(x[:-1]<=x[1:])
+        return np.all(x[:-1]<x[1:])
 
     def plotting():
         a.clear()
@@ -296,8 +302,8 @@ def windowInit():
 
     plot=Button(frame1,text="Plot !",command=plotting)
     plot.configure(font=('Courrier',15),bg = myColor4)
-    plot.grid(row=17,column=1,columnspan=1,sticky=EW)
-        
+    plot.grid(row=18,column=0,columnspan=1,sticky=EW)
+
     def clearall():
         absexpr.delete(0,'end')
         ordexpr.delete(0,'end')
@@ -306,7 +312,8 @@ def windowInit():
         titleexpr.delete(0,'end')
         xlabelexpr.delete(0,'end')
         ylabelexpr.delete(0,'end')
-        error.configure(fg="white")
+        error1.configure(fg="white")
+        error2.configure(fg="white")
         moreConsigne1.configure(font="Courrier 10 italic",fg="black")
         moreConsigne2.configure(font="Courrier 10 italic",fg="black")
         approxvariable.set("/")
@@ -316,7 +323,7 @@ def windowInit():
 
     clearall=Button(frame1,text="Effacer tout",command=clearall)
     clearall.configure(font=('Courrier',15),bg=myColor4)
-    clearall.grid(row=17,column=2,columnspan=1,sticky=EW)
+    clearall.grid(row=18,column=1,columnspan=1,sticky=EW)
 
     return fen
 
