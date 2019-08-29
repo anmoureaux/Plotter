@@ -10,8 +10,8 @@ matplotlib.use('TkAgg')
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
-
 from tkinter import *
+import scipy.stats as stats
 
 
 #initialisation de la fenêtre et de ses composantes
@@ -87,6 +87,7 @@ def windowInit():
     frame1.grid_rowconfigure(13,pad=20)
     frame1.grid_rowconfigure(14,pad=20)
     frame1.grid_rowconfigure(15,pad=20)
+    frame1.grid_rowconfigure(16,pad=20)
 
     funConsigne = Label(frame1,text="Écrivez ici les données à afficher : ")
     funConsigne.configure(font=('Courrier',15),bg = myColor1)
@@ -112,14 +113,14 @@ def windowInit():
     abslabel.grid(row=4,column=1,columnspan=1,sticky=E)
 
     absexpr = Entry(frame1)
-    absexpr.grid(row=4,column=2,columnspan=1,sticky=W)
+    absexpr.grid(row=4,column=2,columnspan=1,sticky=EW)
 
     ordlabel = Label(frame1,text="Ordonnées : ")
     ordlabel.configure(font=('Courrier',15),bg="white")
     ordlabel.grid(row=5,column=1,columnspan=1,sticky=E)
 
     ordexpr = Entry(frame1)
-    ordexpr.grid(row=5,column=2,columnspan=1,sticky=W)
+    ordexpr.grid(row=5,column=2,columnspan=1,sticky=EW)
 
     error = Label(frame1,text="Il semblerait que vous ayez entré un caractère non pris en charge. Seuls les chiffres, les '.' et les ';' sont autorisés.",
             font="Courrier 9 bold italic",
@@ -172,8 +173,21 @@ def windowInit():
     
     var = IntVar()
     gridcheckbutton = Checkbutton(frame1,text="Afficher la grille",highlightthickness=0,bd=0,variable=var)
+    
+    approxlabel = Label(frame1,text="Ajouter une approximation : ",
+            font="Courrier 15",
+            fg="black",
+            bg="white")
+    approxlabel.grid(row=14,column=1,columnspan=1,sticky=E)
+
+    approxvariable = StringVar(frame1)
+    approxvariable.set("linéaire")
+    approxmenu = OptionMenu(frame1,approxvariable,"linéaire","quadratique","cubique")
+    approxmenu.config(font=('courrier',(10)),bg='white')
+    approxmenu.grid(row=14,column=2,columnspan=1,sticky=W)
+
     gridcheckbutton.configure(font=('Courrier',15),bg="white")
-    gridcheckbutton.grid(row=14,column=1,columnspan=2,sticky=EW)
+    gridcheckbutton.grid(row=15,column=1,columnspan=2,sticky=EW)
    
     frame2=Frame(fen,bg="white")
     frame2.pack(fill=BOTH,expand=1)
@@ -245,10 +259,15 @@ def windowInit():
                 elif var.get()==0 : 
                     a.grid(False)
                 canvas.draw()
-
+                if(approxvariable.get()=="linéaire"):
+                    slope, intercept, r_value, p_value, std_err = stats.linregress(x,y)
+                    a.plot(x,np.polyval([slope,intercept],x),'b--')
+                    canvas.draw()
+                        
+                
     plot=Button(frame1,text="Plot !",command=plotting)
     plot.configure(font=('Courrier',15),bg = myColor4)
-    plot.grid(row=15,column=1,columnspan=1,sticky=EW)
+    plot.grid(row=16,column=1,columnspan=1,sticky=EW)
         
     def clearall():
         absexpr.delete(0,'end')
@@ -266,7 +285,7 @@ def windowInit():
 
     clearall=Button(frame1,text="Effacer tout",command=clearall)
     clearall.configure(font=('Courrier',15),bg=myColor4)
-    clearall.grid(row=15,column=2,columnspan=1,sticky=EW)
+    clearall.grid(row=16,column=2,columnspan=1,sticky=EW)
 
     return fen
 
