@@ -218,36 +218,37 @@ def windowInit():
     def plotting():
         a.clear()
         canvas.draw()
-        x = vector(absexpr.get())
-        y = vector(ordexpr.get())
-        if len(x) != len(y) or isSorted(x)== False :
-            if len(x) != len(y) :
-                moreConsigne1.configure(font="Courrier 10 italic bold",fg="red")
-            if isSorted(x) == False : 
-                moreConsigne2.configure(font="Courrier 10 italic bold",fg="red")
-        if len(x) == len(y) or isSorted(x) == True :
-            if len(x) == len(y) :
+        if(absexpr.get() != "") and (ordexpr.get() != ""):
+            x = vector(absexpr.get())
+            y = vector(ordexpr.get())
+            if len(x) != len(y) or isSorted(x)== False :
+                if len(x) != len(y) :
+                    moreConsigne1.configure(font="Courrier 10 italic bold",fg="red")
+                if isSorted(x) == False : 
+                    moreConsigne2.configure(font="Courrier 10 italic bold",fg="red")
+            if len(x) == len(y) or isSorted(x) == True :
+                if len(x) == len(y) :
+                    moreConsigne1.configure(font="Courrier 10 italic",fg="black")
+                if isSorted(x) == True :
+                    moreConsigne2.configure(font="Courrier 10 italic",fg="black")
+            if len(x) == len(y) and isSorted(x) == True:
                 moreConsigne1.configure(font="Courrier 10 italic",fg="black")
-            if isSorted(x) == True :
                 moreConsigne2.configure(font="Courrier 10 italic",fg="black")
-        if len(x) == len(y) and isSorted(x) == True:
-            moreConsigne1.configure(font="Courrier 10 italic",fg="black")
-            moreConsigne2.configure(font="Courrier 10 italic",fg="black")
-            a.plot(x,y,'or')
-            a.set_title(titleexpr.get())
-            a.set_ylabel(ylabelexpr.get())
-            a.set_xlabel(xlabelexpr.get())
-            if (absminexpr.get() != "") and (absmaxexpr.get() != "") : 
-                a.set_xlim([float(absminexpr.get()),float(absmaxexpr.get())])
-            if var.get() == 1 :
-                a.grid()
-            elif var.get()==0 : 
-                a.grid(False)
-            canvas.draw()
+                a.plot(x,y,'or')
+                a.set_title(titleexpr.get())
+                a.set_ylabel(ylabelexpr.get())
+                a.set_xlabel(xlabelexpr.get())
+                if (absminexpr.get() != "") and (absmaxexpr.get() != "") : 
+                    a.set_xlim([float(absminexpr.get()),float(absmaxexpr.get())])
+                if var.get() == 1 :
+                    a.grid()
+                elif var.get()==0 : 
+                    a.grid(False)
+                canvas.draw()
 
     plot=Button(frame1,text="Plot !",command=plotting)
     plot.configure(font=('Courrier',15),bg = myColor4)
-    plot.grid(row=15,column=1,columnspan=1,sticky=W)
+    plot.grid(row=15,column=1,columnspan=1,sticky=EW)
         
     def clearall():
         absexpr.delete(0,'end')
@@ -257,12 +258,15 @@ def windowInit():
         titleexpr.delete(0,'end')
         xlabelexpr.delete(0,'end')
         ylabelexpr.delete(0,'end')
+        error.configure(fg="white")
+        moreConsigne1.configure(font="Courrier 10 italic",fg="black")
+        moreConsigne2.configure(font="Courrier 10 italic",fg="black")
         a.clear()
         canvas.draw()
 
     clearall=Button(frame1,text="Effacer tout",command=clearall)
     clearall.configure(font=('Courrier',15),bg=myColor4)
-    clearall.grid(row=15,column=2,columnspan=1,sticky=E)
+    clearall.grid(row=15,column=2,columnspan=1,sticky=EW)
 
     return fen
 
