@@ -182,32 +182,63 @@ def windowInit():
     toolbar.update()
     canvas._tkcanvas.pack(side=TOP)
     
+    def vector(string):
+        count = 0
+        for i in range(0,len(string)):
+            if(string[i] == ';'):
+                count=count+1
+        x=np.zeros(count+1)
+        current=0
+        startindex=0
+        count2=0
+        for i in range(0,len(string)):
+            if(string[i] == ';'):
+                x[current]=float(string[startindex:i])
+                current=current+1
+                startindex=i+1
+                count2=count2+1
+                if count2==count:
+                    x[current]=float(string[i+1:])
+        return x
+
+    def isSorted(x):
+        return np.all(x[:-1]<=x[1:])
+
     def plotting():
-        #TODO
-        #temporairement
-        #le but serait d'appeler une fonction externe avec l'ensemble des paramètres pour alléger le code
-        a.plot([1,2,3,4,5,6],[5,3,6,7,2,1])
-        a.set_title(titleexpr.get())
-        a.set_ylabel(ylabelexpr.get())
-        a.set_xlabel(xlabelexpr.get())
-        if (absminexpr.get() != "") and (absmaxexpr.get() != "") : 
-            #TODO gérer les ordonnées
-            a.set_xlim([float(absminexpr.get()),float(absmaxexpr.get())])
-        if var.get() == 1 :
-            a.grid()
-        elif var.get()==0 : 
-            a.grid(False)
-        #TODO ici, placer la ligne dans le traitement de condition adéquat et faire de même pour l'ordre des abscisses.
-        moreConsigne1.configure(font="Courrier 10 italic bold",fg="red")
+        a.clear()
         canvas.draw()
+        x = vector(absexpr.get())
+        y = vector(ordexpr.get())
+        if len(x) != len(y) or isSorted(x)== False :
+            if len(x) != len(y) :
+                moreConsigne1.configure(font="Courrier 10 italic bold",fg="red")
+            if isSorted(x) == False : 
+                moreConsigne2.configure(font="Courrier 10 italic bold",fg="red")
+        if len(x) == len(y) or isSorted(x) == True :
+            if len(x) == len(y) :
+                moreConsigne1.configure(font="Courrier 10 italic",fg="black")
+            if isSorted(x) == True :
+                moreConsigne2.configure(font="Courrier 10 italic",fg="black")
+        if len(x) == len(y) and isSorted(x) == True:
+            moreConsigne1.configure(font="Courrier 10 italic",fg="black")
+            moreConsigne2.configure(font="Courrier 10 italic",fg="black")
+            a.plot(x,y,'or')
+            a.set_title(titleexpr.get())
+            a.set_ylabel(ylabelexpr.get())
+            a.set_xlabel(xlabelexpr.get())
+            if (absminexpr.get() != "") and (absmaxexpr.get() != "") : 
+                a.set_xlim([float(absminexpr.get()),float(absmaxexpr.get())])
+            if var.get() == 1 :
+                a.grid()
+            elif var.get()==0 : 
+                a.grid(False)
+            canvas.draw()
 
     plot=Button(frame1,text="Plot !",command=plotting)
     plot.configure(font=('Courrier',15),bg = myColor4)
     plot.grid(row=14,column=1,columnspan=1,sticky=W)
         
     def clearall():
-        #TODO
-        #ici aussi il faudrait appeler une fonction externe avec un tableau d'entries par exemple
         absexpr.delete(0,'end')
         ordexpr.delete(0,'end')
         absminexpr.delete(0,'end')
@@ -224,14 +255,8 @@ def windowInit():
 
     return fen
 
-#retourne un tableau contenant toutes les variables entrées dans la fenêtre
-#def getData():
-
 #renvoit le vecteur y
 #def translate():
- 
-#plot y avec les variables adéquates
-#def plot():
  
 #retourne les variables sur la fenêtre
 #def fetchData():
