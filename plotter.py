@@ -86,7 +86,8 @@ def windowInit():
     frame1.grid_rowconfigure(12,pad=20)
     frame1.grid_rowconfigure(13,pad=20)
     frame1.grid_rowconfigure(14,pad=20)
-    
+    frame1.grid_rowconfigure(15,pad=20)
+
     funConsigne = Label(frame1,text="Écrivez ici les données à afficher : ")
     funConsigne.configure(font=('Courrier',15),bg = myColor1)
     funConsigne.grid(row=0,column = 0,columnspan=4,sticky=EW)
@@ -120,53 +121,59 @@ def windowInit():
     ordexpr = Entry(frame1)
     ordexpr.grid(row=5,column=2,columnspan=1,sticky=W)
 
+    error = Label(frame1,text="Il semblerait que vous ayez entré un caractère non pris en charge. Seuls les chiffres, les '.' et les ';' sont autorisés.",
+            font="Courrier 9 bold italic",
+            bg="white",
+            fg="white")
+    error.grid(row=6,column=1,columnspan=2,sticky=W)
+    
     absconsigne = Label(frame1,text="Entrez les abscisses minimale et maximale : ")
     absconsigne.configure(font=('Courrier',15),bg=myColor2)
-    absconsigne.grid(row=6,column=0,columnspan=4,sticky=EW)
+    absconsigne.grid(row=7,column=0,columnspan=4,sticky=EW)
     
     absminlabel = Label(frame1,text="abscisse minimale : ")
     absminlabel.configure(font=('Courrier',15),bg="white")
-    absminlabel.grid(row=7,column=1,columnspan=1,sticky=E)
+    absminlabel.grid(row=8,column=1,columnspan=1,sticky=E)
 
     absminexpr = Entry(frame1)
-    absminexpr.grid(row=7,column=2,columnspan=1,sticky=W)
+    absminexpr.grid(row=8,column=2,columnspan=1,sticky=W)
 
     absmaxlabel = Label(frame1,text="abscisse maximale : ")
     absmaxlabel.configure(font=('Courrier',15),bg="white")
-    absmaxlabel.grid(row=8,column=1,columnspan=1,sticky=E)
+    absmaxlabel.grid(row=9,column=1,columnspan=1,sticky=E)
 
     absmaxexpr = Entry(frame1)
-    absmaxexpr.grid(row=8,column=2,columnspan=1,sticky=W)
+    absmaxexpr.grid(row=9,column=2,columnspan=1,sticky=W)
 
     optconsigne = Label(frame1,text="Options supplémentaires : ")
     optconsigne.configure(font=('Courrier',15),bg=myColor3)
-    optconsigne.grid(row=9,column=0,columnspan=4,sticky=EW)
+    optconsigne.grid(row=10,column=0,columnspan=4,sticky=EW)
     
     titlelabel = Label(frame1,text=("Titre : "))
     titlelabel.configure(font=('Courrier',15),bg="white")
-    titlelabel.grid(row=10,column=1,columnspan=1,sticky=E)
+    titlelabel.grid(row=11,column=1,columnspan=1,sticky=E)
 
     titleexpr = Entry(frame1)
-    titleexpr.grid(row=10,column=2,columnspan=1,sticky=W)
+    titleexpr.grid(row=11,column=2,columnspan=1,sticky=W)
 
     xlabel = Label(frame1,text=("Nom de l'axe x : "))
     xlabel.configure(font=('Courrier',15),bg="white")
-    xlabel.grid(row=11,column=1,columnspan=1,sticky=E)
+    xlabel.grid(row=12,column=1,columnspan=1,sticky=E)
 
     xlabelexpr = Entry(frame1)
-    xlabelexpr.grid(row=11,column=2,columnspan=1,sticky=W)
+    xlabelexpr.grid(row=12,column=2,columnspan=1,sticky=W)
 
     ylabel = Label(frame1,text=("Nom de l'axe y : "))
     ylabel.configure(font=('Courrier',15),bg="white")
-    ylabel.grid(row=12,column=1,columnspan=1,sticky=E)
+    ylabel.grid(row=13,column=1,columnspan=1,sticky=E)
 
     ylabelexpr = Entry(frame1)
-    ylabelexpr.grid(row=12,column=2,columnspan=1,sticky=W)
+    ylabelexpr.grid(row=13,column=2,columnspan=1,sticky=W)
     
     var = IntVar()
     gridcheckbutton = Checkbutton(frame1,text="Afficher la grille",highlightthickness=0,bd=0,variable=var)
     gridcheckbutton.configure(font=('Courrier',15),bg="white")
-    gridcheckbutton.grid(row=13,column=1,columnspan=2,sticky=EW)
+    gridcheckbutton.grid(row=14,column=1,columnspan=2,sticky=EW)
    
     frame2=Frame(fen,bg="white")
     frame2.pack(fill=BOTH,expand=1)
@@ -183,8 +190,12 @@ def windowInit():
     canvas._tkcanvas.pack(side=TOP)
     
     def vector(string):
+        error.configure(fg="white")
         count = 0
         for i in range(0,len(string)):
+            if(string[i] != ';') and (string[i].isdigit() == False) and (string[i] != '.'):
+                error.configure(fg="red")
+                return 0
             if(string[i] == ';'):
                 count=count+1
         x=np.zeros(count+1)
@@ -236,7 +247,7 @@ def windowInit():
 
     plot=Button(frame1,text="Plot !",command=plotting)
     plot.configure(font=('Courrier',15),bg = myColor4)
-    plot.grid(row=14,column=1,columnspan=1,sticky=W)
+    plot.grid(row=15,column=1,columnspan=1,sticky=W)
         
     def clearall():
         absexpr.delete(0,'end')
@@ -251,7 +262,7 @@ def windowInit():
 
     clearall=Button(frame1,text="Effacer tout",command=clearall)
     clearall.configure(font=('Courrier',15),bg=myColor4)
-    clearall.grid(row=14,column=2,columnspan=1,sticky=E)
+    clearall.grid(row=15,column=2,columnspan=1,sticky=E)
 
     return fen
 
