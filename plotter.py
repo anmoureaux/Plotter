@@ -197,6 +197,8 @@ def windowInit():
             a.grid()
         elif var.get()==0 : 
             a.grid(False)
+        #TODO ici, placer la ligne dans le traitement de condition adéquat et faire de même pour l'ordre des abscisses.
+        moreConsigne1.configure(font="Courrier 10 italic bold",fg="red")
         canvas.draw()
 
     plot=Button(frame1,text="Plot !",command=plotting)
