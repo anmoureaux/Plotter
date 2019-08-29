@@ -137,7 +137,8 @@ def windowInit():
     ylabelexpr = Entry(frame1)
     ylabelexpr.grid(row=8,column=2,columnspan=1,sticky=W)
     
-    gridcheckbutton = Checkbutton(frame1,text="Afficher la grille",highlightthickness=0,bd=0)
+    var = IntVar()
+    gridcheckbutton = Checkbutton(frame1,text="Afficher la grille",highlightthickness=0,bd=0,variable=var)
     gridcheckbutton.configure(font=('Courrier',15),bg="white")
     gridcheckbutton.grid(row=9,column=1,columnspan=2,sticky=EW)
    
@@ -166,6 +167,10 @@ def windowInit():
         if (absminexpr.get() != "") and (absmaxexpr.get() != "") : 
             #TODO gérer les ordonnées
             a.set_xlim([float(absminexpr.get()),float(absmaxexpr.get())])
+        if var.get() == 1 :
+            a.grid()
+        elif var.get()==0 : 
+            a.grid(False)
         canvas.draw()
 
     plot=Button(frame1,text="Plot !",command=plotting)
