@@ -1,26 +1,41 @@
 #!/usr/bin/env python
 
-#tentative d'écriture d'un programme de plotting de fonctions à une variable 1D opérationnel
-#Anatole Moureaux, aout 2019
+#@author : Anatole Moureaux
+#@date : (V1.0) : August 2019
+
+#Plot is Python-based GUI that can be used to quickly plot data (V1.0)
+#(V1.0) The user can type 2 vectors (x and y) to plot them on the screen as red dots. 
+#       Then the user can add more specific features on the graph, like axis labels, title, specific length for the x-axis etc.
+#       The user can also add approximations and interpolation of several degrees
+#Next features : handel more plots on the same graph
+#                add automated/user-friendly legend generation 
+#                add a comprehensive handling of explicit function of x
 
 
-import numpy as np
-import matplotlib
+############################## modules ##############################
+import numpy as np #array manipulation
+
+import matplotlib #plot on Tkinter window integration
 matplotlib.use('TkAgg')
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from matplotlib.figure import Figure
-import matplotlib.pyplot as plt
-from tkinter import *
-import scipy.stats as stats
+
+from tkinter import * #window 
+
+import scipy.stats as stats #approximations and interpolations
 from scipy.interpolate import CubicSpline as spline
 
 
-#initialisation de la fenêtre et de ses composantes
+
+############################## window initialization ##############################
 def windowInit():
     
     fen = Tk()
-    fen.title("Plot (v1.0)")
+    
+    version = 1.0
+    fen.title("Plot ("+version+")")
 
+    #set the window on full screen on opening
     class FullScreenApp(object):
         def __init__(self, master, **kwargs):
             self.master=master
@@ -35,12 +50,14 @@ def windowInit():
             self._geom=geom
     app=FullScreenApp(fen)
 
+    #some colors definition
     myColor1 = '#78f8ff'
     myColor2 = '#78cbff'
     myColor3 = '#75a1ff'
     myColor4 = '#7575ff'
     myColor5 = '#445CFF'
 
+    #definition of the widgets
     frame0=Frame(fen)
     frame0.pack()
     
@@ -214,14 +231,19 @@ def windowInit():
     fig = Figure(figsize=(15,8))
     a = fig.add_subplot(111)
 
+
+    #adding of the plot on the window
     canvas = FigureCanvasTkAgg(fig,frame2)
     canvas.draw()
     canvas.get_tk_widget().pack(side=BOTTOM, fill=BOTH, expand=True)
 
+    #adding of the toolbar beneath the plot
     toolbar = NavigationToolbar2Tk(canvas, frame2)
     toolbar.update()
     canvas._tkcanvas.pack(side=TOP)
     
+
+############################## user's vector expression translation to numpy array ##############################
     def vector(string):
         error1.configure(fg="white")
         error2.configure(fg="white")
@@ -246,9 +268,13 @@ def windowInit():
                     x[current]=float(string[i+1:])
         return x
 
+
+############################## get to know if the vector is sorted ##############################
     def isSorted(x):
         return np.all(x[:-1]<x[1:])
 
+
+############################## plotting function ##############################
     def plotting():
         a.clear()
         canvas.draw()
@@ -268,6 +294,8 @@ def windowInit():
             if len(x) == len(y) and isSorted(x) == True:
                 moreConsigne1.configure(font="Courrier 10 italic",fg="black")
                 moreConsigne2.configure(font="Courrier 10 italic",fg="black")
+                error1.configure(fg="white")
+                error2.configure(fg="white")
                 a.plot(x,y,'or')
                 a.set_title(titleexpr.get())
                 a.set_ylabel(ylabelexpr.get())
@@ -304,6 +332,7 @@ def windowInit():
     plot.configure(font=('Courrier',15),bg = myColor4)
     plot.grid(row=18,column=0,columnspan=1,sticky=EW)
 
+############################## clearing function ##############################
     def clearall():
         absexpr.delete(0,'end')
         ordexpr.delete(0,'end')
@@ -327,15 +356,7 @@ def windowInit():
 
     return fen
 
-#renvoit le vecteur y
-#def translate():
- 
-#retourne les variables sur la fenêtre
-#def fetchData():
-
-#comportement de la fenêtre
-#windowBehavior():
-
+############################################################
 def main():
     windowInit().mainloop()
 
