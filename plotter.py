@@ -203,7 +203,7 @@ def windowInit():
     
     approxvariable = StringVar(frame1)
     approxvariable.set("/")
-    approxmenu = OptionMenu(frame1,approxvariable,"/","0","1","2","3","4","5","6","7","8","9","10")
+    approxmenu = OptionMenu(frame1,approxvariable,"/","0","1","2","3","4","5")
     approxmenu.config(font=('courrier',(10)),bg='white')
     approxmenu.grid(row=15,column=1,columnspan=1,sticky=W)
     
