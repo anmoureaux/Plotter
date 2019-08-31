@@ -114,28 +114,28 @@ def windowInit():
     moreConsigne1 = Label(frame1,text="Les deux vecteurs doivent être de la même taille.",
             font = "Courrier 10 italic",
             bg = "white")
-    moreConsigne1.grid(row=1,column = 0,columnspan=1,sticky=W)
+    moreConsigne1.grid(row=1,column = 0,columnspan=2,sticky=W)
 
     moreConsigne2 = Label(frame1,text="Le vecteur des abscisses doit être dans l'ordre croissant.",
             font = "Courrier 10 italic",
             bg= "white")
-    moreConsigne2.grid(row=2,column = 0,columnspan=1,sticky=W)
+    moreConsigne2.grid(row=2,column = 0,columnspan=2,sticky=W)
 
     exemple = Label(frame1,text="EXEMPLE : 0.5;2.0;1.97;3.03",
             font = "Courrier 10 bold",
             bg = "white")
-    exemple.grid(row=3,column = 0,columnspan=1,sticky=W)
+    exemple.grid(row=3,column = 0,columnspan=2,sticky=W)
    
     abslabel = Label(frame1,text="Abscisses : ")
     abslabel.configure(font=('Courrier',15),bg="white")
-    abslabel.grid(row=4,column=0,columnspan=1,sticky=E)
+    abslabel.grid(row=4,column=0,columnspan=1,sticky=W)
 
     absexpr = Entry(frame1)
     absexpr.grid(row=4,column=1,columnspan=1,sticky=EW)
 
     ordlabel = Label(frame1,text="Ordonnées : ")
     ordlabel.configure(font=('Courrier',15),bg="white")
-    ordlabel.grid(row=5,column=0,columnspan=1,sticky=E)
+    ordlabel.grid(row=5,column=0,columnspan=1,sticky=W)
 
     ordexpr = Entry(frame1)
     ordexpr.grid(row=5,column=1,columnspan=1,sticky=EW)
@@ -158,17 +158,17 @@ def windowInit():
     
     absminlabel = Label(frame1,text="abscisse minimale : ")
     absminlabel.configure(font=('Courrier',15),bg="white")
-    absminlabel.grid(row=9,column=0,columnspan=1,sticky=E)
+    absminlabel.grid(row=9,column=0,columnspan=1,sticky=W)
 
     absminexpr = Entry(frame1)
-    absminexpr.grid(row=9,column=1,columnspan=1,sticky=W)
+    absminexpr.grid(row=9,column=1,columnspan=1,sticky=EW)
 
     absmaxlabel = Label(frame1,text="abscisse maximale : ")
     absmaxlabel.configure(font=('Courrier',15),bg="white")
-    absmaxlabel.grid(row=10,column=0,columnspan=1,sticky=E)
+    absmaxlabel.grid(row=10,column=0,columnspan=1,sticky=W)
 
     absmaxexpr = Entry(frame1)
-    absmaxexpr.grid(row=10,column=1,columnspan=1,sticky=W)
+    absmaxexpr.grid(row=10,column=1,columnspan=1,sticky=EW)
 
     optconsigne = Label(frame1,text="Options supplémentaires : ")
     optconsigne.configure(font=('Courrier',15),bg=myColor3)
@@ -176,48 +176,48 @@ def windowInit():
     
     titlelabel = Label(frame1,text=("Titre : "))
     titlelabel.configure(font=('Courrier',15),bg="white")
-    titlelabel.grid(row=12,column=0,columnspan=1,sticky=E)
+    titlelabel.grid(row=12,column=0,columnspan=1,sticky=W)
 
     titleexpr = Entry(frame1)
-    titleexpr.grid(row=12,column=1,columnspan=1,sticky=W)
+    titleexpr.grid(row=12,column=1,columnspan=1,sticky=EW)
 
     xlabel = Label(frame1,text=("Nom de l'axe x : "))
     xlabel.configure(font=('Courrier',15),bg="white")
-    xlabel.grid(row=13,column=0,columnspan=1,sticky=E)
+    xlabel.grid(row=13,column=0,columnspan=1,sticky=W)
 
     xlabelexpr = Entry(frame1)
-    xlabelexpr.grid(row=13,column=1,columnspan=1,sticky=W)
+    xlabelexpr.grid(row=13,column=1,columnspan=1,sticky=EW)
 
     ylabel = Label(frame1,text=("Nom de l'axe y : "))
     ylabel.configure(font=('Courrier',15),bg="white")
-    ylabel.grid(row=14,column=0,columnspan=1,sticky=E)
+    ylabel.grid(row=14,column=0,columnspan=1,sticky=W)
 
     ylabelexpr = Entry(frame1)
-    ylabelexpr.grid(row=14,column=1,columnspan=1,sticky=W)
+    ylabelexpr.grid(row=14,column=1,columnspan=1,sticky=EW)
     
-    approxlabel = Label(frame1,text="Ajouter une approximation (degré) : ",
+    approxlabel = Label(frame1,text="Approximation (degré) : ",
             font="Courrier 15",
             fg="black",
             bg="white")
-    approxlabel.grid(row=15,column=0,columnspan=1,sticky=E)
+    approxlabel.grid(row=15,column=0,columnspan=2,sticky=W)
     
     approxvariable = StringVar(frame1)
     approxvariable.set("/")
     approxmenu = OptionMenu(frame1,approxvariable,"/","0","1","2","3","4","5")
     approxmenu.config(font=('courrier',(10)),bg='white')
-    approxmenu.grid(row=15,column=1,columnspan=1,sticky=W)
+    approxmenu.grid(row=15,column=1,columnspan=1,sticky=EW)
     
-    interplabel = Label(frame1,text="Ajouter une interpolation : ",
+    interplabel = Label(frame1,text="Interpolation : ",
             font="Courrier 15",
             fg="black",
             bg="white")
-    interplabel.grid(row=16,column=0,columnspan=1,sticky=E)
+    interplabel.grid(row=16,column=0,columnspan=1,sticky=W)
     
     interpvariable = StringVar(frame1)
     interpvariable.set("aucune")
-    interpmenu = OptionMenu(frame1,interpvariable,"aucune","linéaire par morceaux","splines cubiques", "degré n")
+    interpmenu = OptionMenu(frame1,interpvariable,"aucune","linéaire","splines cubiques", "degré n")
     interpmenu.config(font=('courrier',(10)),bg='white')
-    interpmenu.grid(row=16,column=1,columnspan=1,sticky=W)
+    interpmenu.grid(row=16,column=1,columnspan=1,sticky=EW)
 
     var = IntVar()
     gridcheckbutton = Checkbutton(frame1,text="Afficher la grille",highlightthickness=0,bd=0,variable=var)
@@ -314,7 +314,7 @@ def windowInit():
                     a.plot(xabs,np.polyval(z,xabs),'b--')
                     canvas.draw()
                 if(interpvariable.get()!="aucune"):
-                    if(interpvariable.get()=="linéaire par morceaux"):
+                    if(interpvariable.get()=="linéaire"):
                         a.plot(x,y,'b--')
                         canvas.draw()
                     if(interpvariable.get()=="splines cubiques"):
