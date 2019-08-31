@@ -33,7 +33,7 @@ def windowInit():
     fen = Tk()
     
     version = 1.1
-    fen.title("Plot ("+str(version)+")")
+    fen.title("Plot (V"+str(version)+")")
 
     #set the window on full screen on opening
     class FullScreenApp(object):
