@@ -110,6 +110,9 @@ def windowInit():
     frame1.grid_rowconfigure(20,pad=0)
     frame1.grid_rowconfigure(21,pad=0)
     frame1.grid_rowconfigure(22,pad=0)
+    frame1.grid_rowconfigure(23,pad=0)
+    frame1.grid_rowconfigure(24,pad=0)
+    frame1.grid_rowconfigure(25,pad=0)
 
     funConsigne = Label(frame1,text="Écrivez ici les données à afficher : ")
     funConsigne.configure(font=('Courrier',15),bg = myColor1)
@@ -169,90 +172,92 @@ def windowInit():
     evalexpr = Entry(frame1)
     evalexpr.grid(row=9,column=1,columnspan=1,sticky=EW)
     
+    #TODO place warnings and errors here
+    
     absconsigne = Label(frame1,text="Entrez les abscisses minimale et maximale : ")
     absconsigne.configure(font=('Courrier',15),bg=myColor3)
-    absconsigne.grid(row=10,column=0,columnspan=2,sticky=EW)
+    absconsigne.grid(row=13,column=0,columnspan=2,sticky=EW)
     
     absminlabel = Label(frame1,text="Abscisse minimale : ")
     absminlabel.configure(font=('Courrier',15),bg="white")
-    absminlabel.grid(row=11,column=0,columnspan=1,sticky=W)
+    absminlabel.grid(row=14,column=0,columnspan=1,sticky=W)
 
     absminexpr = Entry(frame1)
-    absminexpr.grid(row=11,column=1,columnspan=1,sticky=EW)
+    absminexpr.grid(row=14,column=1,columnspan=1,sticky=EW)
 
     absmaxlabel = Label(frame1,text="Abscisse maximale : ")
     absmaxlabel.configure(font=('Courrier',15),bg="white")
-    absmaxlabel.grid(row=12,column=0,columnspan=1,sticky=W)
+    absmaxlabel.grid(row=15,column=0,columnspan=1,sticky=W)
 
     absmaxexpr = Entry(frame1)
-    absmaxexpr.grid(row=12,column=1,columnspan=1,sticky=EW)
+    absmaxexpr.grid(row=15,column=1,columnspan=1,sticky=EW)
 
     error3 = Label(frame1,text="Remplissez ces champs afin de pouvoir continuer",
             font="courrier 9 bold italic",
             fg="white",
             bg="white")
-    error3.grid(row=13,column=0,columnspan=2,sticky=W)
+    error3.grid(row=16,column=0,columnspan=2,sticky=W)
 
     error4 = Label(frame1,text="Il semblerait qu'il y ait une erreur dans vos abscisses",
             font="courrier 9 bold italic",
             fg="white",
             bg="white")
-    error4.grid(row=14,column=0,columnspan=2,sticky=W)
+    error4.grid(row=17,column=0,columnspan=2,sticky=W)
     
     optconsigne = Label(frame1,text="Options supplémentaires : ")
     optconsigne.configure(font=('Courrier',15),bg=myColor4)
-    optconsigne.grid(row=15,column=0,columnspan=2,sticky=EW)
+    optconsigne.grid(row=18,column=0,columnspan=2,sticky=EW)
     
     titlelabel = Label(frame1,text=("Titre : "))
     titlelabel.configure(font=('Courrier',15),bg="white")
-    titlelabel.grid(row=16,column=0,columnspan=1,sticky=W)
+    titlelabel.grid(row=19,column=0,columnspan=1,sticky=W)
 
     titleexpr = Entry(frame1)
-    titleexpr.grid(row=16,column=1,columnspan=1,sticky=EW)
+    titleexpr.grid(row=19,column=1,columnspan=1,sticky=EW)
 
     xlabel = Label(frame1,text=("Nom de l'axe x : "))
     xlabel.configure(font=('Courrier',15),bg="white")
-    xlabel.grid(row=17,column=0,columnspan=1,sticky=W)
+    xlabel.grid(row=20,column=0,columnspan=1,sticky=W)
 
     xlabelexpr = Entry(frame1)
-    xlabelexpr.grid(row=17,column=1,columnspan=1,sticky=EW)
+    xlabelexpr.grid(row=20,column=1,columnspan=1,sticky=EW)
 
     ylabel = Label(frame1,text=("Nom de l'axe y : "))
     ylabel.configure(font=('Courrier',15),bg="white")
-    ylabel.grid(row=18,column=0,columnspan=1,sticky=W)
+    ylabel.grid(row=21,column=0,columnspan=1,sticky=W)
 
     ylabelexpr = Entry(frame1)
-    ylabelexpr.grid(row=18,column=1,columnspan=1,sticky=EW)
+    ylabelexpr.grid(row=21,column=1,columnspan=1,sticky=EW)
     
     approxlabel = Label(frame1,text="Approximation (degré) : ",
             font="Courrier 15",
             fg="black",
             bg="white")
-    approxlabel.grid(row=19,column=0,columnspan=2,sticky=W)
+    approxlabel.grid(row=22,column=0,columnspan=2,sticky=W)
     
     approxvariable = StringVar(frame1)
     approxvariable.set("/")
     approxmenu = OptionMenu(frame1,approxvariable,"/","0","1","2","3","4","5")
     approxmenu.config(font=('courrier',(10)),bg='white')
-    approxmenu.grid(row=19,column=1,columnspan=1,sticky=EW)
+    approxmenu.grid(row=22,column=1,columnspan=1,sticky=EW)
     
     interplabel = Label(frame1,text="Interpolation : ",
             font="Courrier 15",
             fg="black",
             bg="white")
-    interplabel.grid(row=20,column=0,columnspan=1,sticky=W)
+    interplabel.grid(row=23,column=0,columnspan=1,sticky=W)
     
     interpvariable = StringVar(frame1)
     interpvariable.set("aucune")
     interpmenu = OptionMenu(frame1,interpvariable,"aucune","linéaire","splines cubiques", "degré n")
     interpmenu.config(font=('courrier',(10)),bg='white')
-    interpmenu.grid(row=20,column=1,columnspan=1,sticky=EW)
+    interpmenu.grid(row=23,column=1,columnspan=1,sticky=EW)
 
     var = IntVar()
     gridcheckbutton = Checkbutton(frame1,text="Afficher la grille",highlightthickness=0,bd=0,variable=var)
 
     gridcheckbutton.configure(font=('Courrier',15),bg="white")
-    gridcheckbutton.grid(row=21,column=0,columnspan=2,sticky=EW)
+    gridcheckbutton.grid(row=24,column=0,columnspan=2,sticky=EW)
    
     frame2=Frame(fen,bg="white")
     frame2.pack(fill=BOTH,expand=1)
@@ -384,7 +389,7 @@ def windowInit():
 
     plot=Button(frame1,text="Plot !",command=plotting)
     plot.configure(font=('Courrier',15),bg = myColor5,fg="white")
-    plot.grid(row=22,column=0,columnspan=1,sticky=EW)
+    plot.grid(row=25,column=0,columnspan=1,sticky=EW)
 
 ############################## clearing function ##############################
     def clearall():
@@ -409,7 +414,7 @@ def windowInit():
 
     clearall=Button(frame1,text="Effacer tout",command=clearall)
     clearall.configure(font=('Courrier',15),bg=myColor5,fg="white")
-    clearall.grid(row=22,column=1,columnspan=1,sticky=EW)
+    clearall.grid(row=25,column=1,columnspan=1,sticky=EW)
 
     return fen
 
