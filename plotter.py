@@ -97,15 +97,15 @@ def windowInit():
     frame1.grid_rowconfigure(7,pad=0)
     frame1.grid_rowconfigure(8,pad=20)
     frame1.grid_rowconfigure(9,pad=0)
-    frame1.grid_rowconfigure(10,pad=20)
+    frame1.grid_rowconfigure(10,pad=0)
     frame1.grid_rowconfigure(11,pad=0)
     frame1.grid_rowconfigure(12,pad=0)
-    frame1.grid_rowconfigure(13,pad=0)
+    frame1.grid_rowconfigure(13,pad=20)
     frame1.grid_rowconfigure(14,pad=0)
-    frame1.grid_rowconfigure(15,pad=20)
+    frame1.grid_rowconfigure(15,pad=0)
     frame1.grid_rowconfigure(16,pad=0)
     frame1.grid_rowconfigure(17,pad=0)
-    frame1.grid_rowconfigure(18,pad=0)
+    frame1.grid_rowconfigure(18,pad=20)
     frame1.grid_rowconfigure(19,pad=0)
     frame1.grid_rowconfigure(20,pad=0)
     frame1.grid_rowconfigure(21,pad=0)
@@ -172,7 +172,21 @@ def windowInit():
     evalexpr = Entry(frame1)
     evalexpr.grid(row=9,column=1,columnspan=1,sticky=EW)
     
-    #TODO place warnings and errors here
+    tuto1 = Label(frame1,text="tuto1",
+            font="courrier 10 italic",
+            bg="white")
+    tuto1.grid(row=10,column=0,columnspan=2,sticky=W)
+
+    tuto2 = Label(frame1,text="tuto2",
+            font="courrier 10 italic",
+            bg="white")
+    tuto2.grid(row=11,column=0,columnspan=2,sticky=W)
+
+    error5 = Label(frame1,text="erreur5r",
+            font="courrier 9 bold italic",
+            fg="red",
+            bg="white")
+    error5.grid(row=12,column=0,columnspan=2,sticky=W)
     
     absconsigne = Label(frame1,text="Entrez les abscisses minimale et maximale : ")
     absconsigne.configure(font=('Courrier',15),bg=myColor3)
@@ -275,7 +289,6 @@ def windowInit():
     toolbar = NavigationToolbar2Tk(canvas, frame2)
     toolbar.update()
     canvas._tkcanvas.pack(side=TOP)
-    
 
 ############################## user's vector expression translation to numpy array ##############################
     def vector(string):
@@ -375,7 +388,24 @@ def windowInit():
                 error3.configure(fg="white")
                 error4.configure(fg="white")
                 x = np.linspace(float(absminexpr.get()),float(absmaxexpr.get()),1000)
-                y = eval(evalexpr.get())
+                #dictionnary
+                fun_dict = {'sin':np.sin,
+                            'cos':np.cos,
+                            'exp':np.exp,
+                            'arccos':np.arccos,
+                            'tan':np.tan,
+                            'arcsin':np.arcsin,
+                            'arctan':np.arctan,
+                            'sinh':np.sinh,
+                            'cosh':np.cosh,
+                            'tanh':np.tanh,
+                            'log':np.log,
+                            'tan':np.tan,
+                            'sqrt':np.sqrt,
+                            'abs':np.abs,
+                            'x':x
+                }
+                y = eval(evalexpr.get(),fun_dict)
                 a.plot(x,y)
                 a.set_title(titleexpr.get())
                 a.set_ylabel(ylabelexpr.get())
