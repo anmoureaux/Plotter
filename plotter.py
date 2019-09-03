@@ -4,12 +4,15 @@
 #@date : (V1.0) : August 2019
 
 #Plot is Python-based GUI that can be used to quickly plot data (V1.0)
+
 #(V1.0) The user can type 2 vectors (x and y) to plot them on the screen as red dots. 
 #       Then the user can add more specific features on the graph, like axis labels, title, specific length for the x-axis etc.
-#       The user can also add approximations and interpolation of several degrees
+#       The user can also add approximations and interpolation of several degrees.
+#(V2.0) The user can type an explicit expression for a function of x to plot it.
+
 #Next features : handel more plots on the same graph
 #                add automated/user-friendly legend generation 
-#                add a comprehensive handling of explicit function of x
+
 
 
 ############################## modules ##############################
@@ -32,7 +35,7 @@ def windowInit():
     
     fen = Tk()
     
-    version = 1.1
+    version = 2.0
     fen.title("Plot (V"+str(version)+")")
 
     #set the window on full screen on opening
@@ -172,19 +175,19 @@ def windowInit():
     evalexpr = Entry(frame1)
     evalexpr.grid(row=9,column=1,columnspan=1,sticky=EW)
     
-    tuto1 = Label(frame1,text="tuto1",
-            font="courrier 10 italic",
+    tuto1 = Label(frame1,text="Mutliplication : ()*() ; Division : ()/() ; Puissance : ()**()",
+            font="courrier 10",
             bg="white")
     tuto1.grid(row=10,column=0,columnspan=2,sticky=W)
 
-    tuto2 = Label(frame1,text="tuto2",
-            font="courrier 10 italic",
+    tuto2 = Label(frame1,text="Les fonctions trigonométriques, exp(), log(), sqrt() et abs() sont également autorisées",
+            font="courrier 10",
             bg="white")
     tuto2.grid(row=11,column=0,columnspan=2,sticky=W)
 
-    error5 = Label(frame1,text="erreur5r",
+    error5 = Label(frame1,text="erreur5",
             font="courrier 9 bold italic",
-            fg="red",
+            fg="white",
             bg="white")
     error5.grid(row=12,column=0,columnspan=2,sticky=W)
     
@@ -387,7 +390,8 @@ def windowInit():
             else :
                 error3.configure(fg="white")
                 error4.configure(fg="white")
-                x = np.linspace(float(absminexpr.get()),float(absmaxexpr.get()),1000)
+                i = (int((float(absmaxexpr.get())-float(absminexpr.get()))/1000)+1)*1000
+                x = np.linspace(float(absminexpr.get()),float(absmaxexpr.get()),i)
                 #dictionnary
                 fun_dict = {'sin':np.sin,
                             'cos':np.cos,
@@ -405,17 +409,21 @@ def windowInit():
                             'abs':np.abs,
                             'x':x
                 }
-                y = eval(evalexpr.get(),fun_dict)
-                a.plot(x,y)
-                a.set_title(titleexpr.get())
-                a.set_ylabel(ylabelexpr.get())
-                a.set_xlabel(xlabelexpr.get())
-                if var.get() == 1 :
-                    a.grid()
-                elif var.get()==0 :
-                    a.grid(False)
-                canvas.draw()
-
+                try :
+                    error5.config(fg="white")
+                    y = eval(evalexpr.get(),fun_dict)
+                    a.plot(x,y)
+                    a.set_title(titleexpr.get())
+                    a.set_ylabel(ylabelexpr.get())
+                    a.set_xlabel(xlabelexpr.get())
+                    if var.get() == 1 :
+                        a.grid()
+                    elif var.get()==0 :
+                        a.grid(False)
+                    canvas.draw()
+                except (NameError, SyntaxError):
+                    error5.config(text="Il semblerait que votre expression comporte une erreur. Réessayez svp.",
+                            fg="red")
 
     plot=Button(frame1,text="Plot !",command=plotting)
     plot.configure(font=('Courrier',15),bg = myColor5,fg="white")
