@@ -421,7 +421,7 @@ def windowInit():
                     elif var.get()==0 :
                         a.grid(False)
                     canvas.draw()
-                except (NameError, SyntaxError):
+                except (NameError,SyntaxError,ValueError):
                     error5.config(text="Il semblerait que votre expression comporte une erreur. Réessayez svp.",
                             fg="red")
 
