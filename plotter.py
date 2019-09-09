@@ -29,7 +29,52 @@ import scipy.stats as stats #approximations and interpolations
 from scipy.interpolate import CubicSpline as spline
 
 
+############################### scrollable list of buttons ##############################
+#(https://stackoverflow.com/questions/31762698/dynamic-button-with-scrollbar-in-tkinter-python)
+class VerticalScrolledFrame(Frame):
+    """A pure Tkinter scrollable frame that actually works!
 
+    * Use the 'interior' attribute to place widgets inside the scrollable frame
+    * Construct and pack/place/grid normally
+    * This frame only allows vertical scrolling
+    """
+    def __init__(self, parent, *args, **kw):
+        Frame.__init__(self, parent, *args, **kw)
+
+        # create a canvas object and a vertical scrollbar for scrolling it
+        vscrollbar = Scrollbar(self, orient=VERTICAL)
+        vscrollbar.pack(fill=Y, side=RIGHT, expand=False)
+        canvas = Canvas(self, bd=0, highlightthickness=0,
+                        yscrollcommand=vscrollbar.set,bg="white",height=155)
+        canvas.pack(side=LEFT, fill=BOTH, expand=True)
+        vscrollbar.config(command=canvas.yview)
+
+        # reset the view
+        canvas.xview_moveto(0)
+        canvas.yview_moveto(0)
+
+        # create a frame inside the canvas which will be scrolled with it
+        self.interior = interior = Frame(canvas,bg="white")
+        interior_id = canvas.create_window(0, 0, window=interior,
+                                           anchor=NW)
+
+        # track changes to the canvas and frame width and sync them,
+        # also updating the scrollbar
+        def _configure_interior(event):
+            # update the scrollbars to match the size of the inner frame
+            size = (interior.winfo_reqwidth(), interior.winfo_reqheight())
+            canvas.config(scrollregion="0 0 %s %s" % size)
+            if interior.winfo_reqwidth() != canvas.winfo_width():
+                # update the canvas's width to fit the inner frame
+                canvas.config(width=interior.winfo_reqwidth())
+
+        interior.bind('<Configure>', _configure_interior)
+
+        def _configure_canvas(event):
+            if interior.winfo_reqwidth() != canvas.winfo_width():
+                # update the inner frame's width to fill the canvas
+                canvas.itemconfigure(interior_id, width=canvas.winfo_width())
+        canvas.bind('<Configure>', _configure_canvas)
 ############################## window initialization ##############################
 def windowInit():
     
@@ -257,7 +302,7 @@ def windowInit():
     approxvariable = StringVar(frame1)
     approxvariable.set("/")
     approxmenu = OptionMenu(frame1,approxvariable,"/","0","1","2","3","4","5")
-    approxmenu.config(font=('courrier',(10)),bg='white')
+    approxmenu.config(font=('courrier',(10)),bg='white',relief=FLAT)
     approxmenu.grid(row=22,column=1,columnspan=1,sticky=EW)
     
     interplabel = Label(frame1,text="Interpolation : ",
@@ -269,7 +314,7 @@ def windowInit():
     interpvariable = StringVar(frame1)
     interpvariable.set("aucune")
     interpmenu = OptionMenu(frame1,interpvariable,"aucune","linéaire","splines cubiques", "degré n")
-    interpmenu.config(font=('courrier',(10)),bg='white')
+    interpmenu.config(font=('courrier',(10)),bg='white',relief=FLAT)
     interpmenu.grid(row=23,column=1,columnspan=1,sticky=EW)
 
     var = IntVar()
@@ -427,24 +472,32 @@ def windowInit():
                     error5.config(text="Il semblerait que votre expression comporte une erreur. Réessayez svp.",
                             fg="red")
 
-    plot=Button(frame1,text="Plot !",command=plotting)
-    plot.configure(font=('Courrier',18),bg = myColor5,fg="white")
-    plot.grid(row=25,column=0,columnspan=1,sticky=EW)
+    #plot=Button(frame1,text="Plot !",command=plotting,relief=FLAT)
+    #plot.configure(font=('Courrier',18),bg = myColor5,fg="white")
+    #plot.grid(row=25,column=0,columnspan=1,sticky=EW)
 
-    addanother = Button(frame1,text="Ajouter un graphe")
-    addanother.configure(font=('Courrier',18),bg=myColor5,fg="white")
-    addanother.grid(row=25,column=1,columnspan=1,sticky=EW)
+    #addanother = Button(frame1,text="Ajouter un graphe",relief=FLAT)
+    #addanother.configure(font=('Courrier',18),bg=myColor5,fg="white")
+    #addanother.grid(row=25,column=1,columnspan=1,sticky=EW)
 
-    display = Frame(frame1,bg="red")
+    display = Frame(frame1,bg="white")
     display.grid(row=26,column=0,columnspan=2,sticky=EW)
-    scrollbar = Scrollbar(display)
-    scrollbar.pack(side=RIGHT,fill=Y)
-    listbox = Listbox(display,height=6,yscrollcommand=scrollbar.set,bg=myColor1)
+
+    scframe = VerticalScrolledFrame(display)
+    scframe.pack()
+
+    lis = list('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
+    for i, x in enumerate(lis):
+        btn = Button(scframe.interior, height=1, width=50, relief=FLAT,bg="gray99", fg="purple3",
+        font="Dosis", text='Button ' + lis[i],
+        command=lambda i=i,x=x: openlink(i))
+        btn.pack(padx=10, pady=5, side=TOP)
+        
+    def openlink(i):
+        print(lis[i])
+
+    #testing
     mylist=['graph1','graph2','graph3','graph4','graph5','graph6','graph7','graph8','graph9','graph10','graph11','graph12']
-    for item in mylist :
-        listbox.insert(END,item)
-    listbox.pack(side=LEFT,fill=X,expand=True)
-    scrollbar.config(command=listbox.yview)
 
 ############################## clearing function ##############################
     def clearall():
@@ -467,7 +520,7 @@ def windowInit():
         a.clear()
         canvas.draw()
 
-    clearall=Button(frame1,text="Effacer tout",command=clearall)
+    clearall=Button(frame1,text="Effacer tout",command=clearall,relief=FLAT)
     clearall.configure(font=('Courrier',18),bg=myColor5,fg="white")
     clearall.grid(row=27,column=0,columnspan=2,sticky=EW)
 
