@@ -45,7 +45,7 @@ class VerticalScrolledFrame(Frame):
         vscrollbar = Scrollbar(self, orient=VERTICAL)
         vscrollbar.pack(fill=Y, side=RIGHT, expand=False)
         canvas = Canvas(self, bd=0, highlightthickness=0,
-                        yscrollcommand=vscrollbar.set,bg="white",height=155)
+                        yscrollcommand=vscrollbar.set,bg="white",height=190)
         canvas.pack(side=LEFT, fill=BOTH, expand=True)
         vscrollbar.config(command=canvas.yview)
 
@@ -481,23 +481,34 @@ def windowInit():
     #addanother.grid(row=25,column=1,columnspan=1,sticky=EW)
 
     display = Frame(frame1,bg="white")
-    display.grid(row=26,column=0,columnspan=2,sticky=EW)
+    display.grid(row=25,column=0,columnspan=1,sticky=EW)
 
     scframe = VerticalScrolledFrame(display)
     scframe.pack()
 
-    lis = list('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
-    for i, x in enumerate(lis):
-        btn = Button(scframe.interior, height=1, width=50, relief=FLAT,bg="gray99", fg="purple3",
-        font="Dosis", text='Button ' + lis[i],
+    mylist=['graph1','graph2','graph3','graph4','graph5','graph6','graph7','graph8','graph9','graph10','graph11','graph12']
+    for i, x in enumerate(mylist):
+        btn = Button(scframe.interior, height=1, width=22, relief=FLAT,bg="gray99", fg=myColor5,
+                font="Dosis,bold", text=mylist[i],
         command=lambda i=i,x=x: openlink(i))
         btn.pack(padx=10, pady=5, side=TOP)
         
     def openlink(i):
-        print(lis[i])
+        print(mylist[i])
 
     #testing
     mylist=['graph1','graph2','graph3','graph4','graph5','graph6','graph7','graph8','graph9','graph10','graph11','graph12']
+    
+    butts = Frame(frame1,bg="white")
+    butts.grid(row=25,column=1,columnspan=1,sticky=EW)
+    
+    plot=Button(butts,text="Plot !",command=plotting,relief=FLAT)
+    plot.configure(font=('Courrier',18),bg = myColor5,fg="white")
+    plot.pack(side=TOP,fill=BOTH)
+
+    addanother = Button(butts,text="Ajouter un graphe",relief=FLAT)
+    addanother.configure(font=('Courrier',18),bg=myColor5,fg="white")
+    addanother.pack(side=TOP,fill=BOTH)
 
 ############################## clearing function ##############################
     def clearall():
@@ -520,9 +531,9 @@ def windowInit():
         a.clear()
         canvas.draw()
 
-    clearall=Button(frame1,text="Effacer tout",command=clearall,relief=FLAT)
+    clearall=Button(butts,text="Effacer tout",command=clearall,relief=FLAT)
     clearall.configure(font=('Courrier',18),bg=myColor5,fg="white")
-    clearall.grid(row=27,column=0,columnspan=2,sticky=EW)
+    clearall.pack(side=TOP,fill=BOTH)
 
     return fen
 
