@@ -116,6 +116,7 @@ def windowInit():
     frame1.grid_rowconfigure(23,pad=0)
     frame1.grid_rowconfigure(24,pad=0)
     frame1.grid_rowconfigure(25,pad=0)
+    frame1.grid_rowconfigure(26,pad=0)
 
     funConsigne = Label(frame1,text="Écrivez ici les données à afficher : ")
     funConsigne.configure(font=('Courrier',15),bg = myColor1)
@@ -429,6 +430,10 @@ def windowInit():
     plot.configure(font=('Courrier',15),bg = myColor5,fg="white")
     plot.grid(row=25,column=0,columnspan=1,sticky=EW)
 
+    addanother = Button(frame1,text="Ajouter un graphe")
+    addanother.configure(font=('Courrier',15),bg=myColor5,fg="white")
+    addanother.grid(row=25,column=1,columnspan=1,sticky=EW)
+
 ############################## clearing function ##############################
     def clearall():
         absexpr.delete(0,'end')
@@ -452,7 +457,7 @@ def windowInit():
 
     clearall=Button(frame1,text="Effacer tout",command=clearall)
     clearall.configure(font=('Courrier',15),bg=myColor5,fg="white")
-    clearall.grid(row=25,column=1,columnspan=1,sticky=EW)
+    clearall.grid(row=26,column=0,columnspan=2,sticky=EW)
 
     return fen
 
