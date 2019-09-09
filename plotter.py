@@ -117,6 +117,7 @@ def windowInit():
     frame1.grid_rowconfigure(24,pad=0)
     frame1.grid_rowconfigure(25,pad=0)
     frame1.grid_rowconfigure(26,pad=0)
+    frame1.grid_rowconfigure(27,pad=0)
 
     funConsigne = Label(frame1,text="Écrivez ici les données à afficher : ")
     funConsigne.configure(font=('Courrier',15),bg = myColor1)
@@ -427,12 +428,23 @@ def windowInit():
                             fg="red")
 
     plot=Button(frame1,text="Plot !",command=plotting)
-    plot.configure(font=('Courrier',15),bg = myColor5,fg="white")
+    plot.configure(font=('Courrier',18),bg = myColor5,fg="white")
     plot.grid(row=25,column=0,columnspan=1,sticky=EW)
 
     addanother = Button(frame1,text="Ajouter un graphe")
-    addanother.configure(font=('Courrier',15),bg=myColor5,fg="white")
+    addanother.configure(font=('Courrier',18),bg=myColor5,fg="white")
     addanother.grid(row=25,column=1,columnspan=1,sticky=EW)
+
+    display = Frame(frame1,bg="red")
+    display.grid(row=26,column=0,columnspan=2,sticky=EW)
+    scrollbar = Scrollbar(display)
+    scrollbar.pack(side=RIGHT,fill=Y)
+    listbox = Listbox(display,height=6,yscrollcommand=scrollbar.set,bg=myColor1)
+    mylist=['graph1','graph2','graph3','graph4','graph5','graph6','graph7','graph8','graph9','graph10','graph11','graph12']
+    for item in mylist :
+        listbox.insert(END,item)
+    listbox.pack(side=LEFT,fill=X,expand=True)
+    scrollbar.config(command=listbox.yview)
 
 ############################## clearing function ##############################
     def clearall():
@@ -456,8 +468,8 @@ def windowInit():
         canvas.draw()
 
     clearall=Button(frame1,text="Effacer tout",command=clearall)
-    clearall.configure(font=('Courrier',15),bg=myColor5,fg="white")
-    clearall.grid(row=26,column=0,columnspan=2,sticky=EW)
+    clearall.configure(font=('Courrier',18),bg=myColor5,fg="white")
+    clearall.grid(row=27,column=0,columnspan=2,sticky=EW)
 
     return fen
 
