@@ -27,7 +27,7 @@ from tkinter import * #window
 
 import scipy.stats as stats #approximations and interpolations
 from scipy.interpolate import CubicSpline as spline
-
+from PIL import Image, ImageTk
 
 ############################### scrollable list of buttons ##############################
 #(https://stackoverflow.com/questions/31762698/dynamic-button-with-scrollbar-in-tkinter-python)
@@ -472,32 +472,36 @@ def windowInit():
                     error5.config(text="Il semblerait que votre expression comporte une erreur. Réessayez svp.",
                             fg="red")
 
-    #plot=Button(frame1,text="Plot !",command=plotting,relief=FLAT)
-    #plot.configure(font=('Courrier',18),bg = myColor5,fg="white")
-    #plot.grid(row=25,column=0,columnspan=1,sticky=EW)
-
-    #addanother = Button(frame1,text="Ajouter un graphe",relief=FLAT)
-    #addanother.configure(font=('Courrier',18),bg=myColor5,fg="white")
-    #addanother.grid(row=25,column=1,columnspan=1,sticky=EW)
-
+    
+                    
+######################### menu déroulant (de boutons) des différents graphes ########################                 
     display = Frame(frame1,bg="white")
     display.grid(row=25,column=0,columnspan=1,sticky=EW)
 
     scframe = VerticalScrolledFrame(display)
     scframe.pack()
 
+    photo1=ImageTk.PhotoImage(file="button1v3.png")
+    photo2=ImageTk.PhotoImage(file="button2v3.png")
+
+    class HoverButton(Button):
+        def __init__(self, master, **kw):
+            Button.__init__(self,master=master,compound="center",image=photo1,bg="white",activebackground="white",relief=FLAT,**kw)
+            self.bind("<Enter>", self.on_enter)
+            self.bind("<Leave>", self.on_leave)
+        def on_enter(self,e):
+            self['image'] = photo2
+        def on_leave(self,e):
+            self['image'] = photo1
+            self['background'] = "white"
+
     mylist=['graph1','graph2','graph3','graph4','graph5','graph6','graph7','graph8','graph9','graph10','graph11','graph12']
     for i, x in enumerate(mylist):
-        btn = Button(scframe.interior, height=1, width=22, relief=FLAT,bg="gray99", fg=myColor5,
-                font="Dosis,bold", text=mylist[i],
-        command=lambda i=i,x=x: openlink(i))
+        btn = HoverButton(scframe.interior,text=mylist[i],command=lambda i=i,x=x: openlink(i))
         btn.pack(padx=10, pady=5, side=TOP)
         
     def openlink(i):
         print(mylist[i])
-
-    #testing
-    mylist=['graph1','graph2','graph3','graph4','graph5','graph6','graph7','graph8','graph9','graph10','graph11','graph12']
     
     butts = Frame(frame1,bg="white")
     butts.grid(row=25,column=1,columnspan=1,sticky=EW)

@@ -6,8 +6,8 @@ root.configure(background="white")
 myFrame=tk.Frame(root,bg="white",width=1000,height=1000)
 myFrame.pack()
 
-can = tk.Canvas(root,bg="white",width=1000,height=1000)
-can.pack()
+#can = tk.Canvas(root,bg="white",width=1000,height=1000)
+#can.pack()
 
 photo1=ImageTk.PhotoImage(file="button1v3.png")
 photo2=ImageTk.PhotoImage(file="button2v3.png")
