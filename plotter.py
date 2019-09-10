@@ -346,7 +346,7 @@ def windowInit():
         error2.configure(fg="white")
         count = 0
         for i in range(0,len(string)):
-            if(string[i] != ';') and (string[i].isdigit() == False) and (string[i] != '.'):
+            if(string[i] != ';') and (string[i].isdigit() == False) and (string[i] != '.') and (string[i] != '-'):
                 error1.configure(fg="red")
                 error2.configure(fg="red")
             if(string[i] == ';'):
