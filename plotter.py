@@ -30,6 +30,7 @@ from scipy.interpolate import CubicSpline as spline
 from PIL import Image, ImageTk
 from functools import partial
 
+
 ############################### scrollable list of buttons ##############################
 #(https://stackoverflow.com/questions/31762698/dynamic-button-with-scrollbar-in-tkinter-python)
 class VerticalScrolledFrame(Frame):
@@ -76,6 +77,8 @@ class VerticalScrolledFrame(Frame):
                 # update the inner frame's width to fill the canvas
                 canvas.itemconfigure(interior_id, width=canvas.winfo_width())
         canvas.bind('<Configure>', _configure_canvas)
+
+
 ############################## window initialization ##############################
 def windowInit():
     
@@ -85,6 +88,7 @@ def windowInit():
     fen.title("Plot (V"+str(version)+")")
 
     #set the window on full screen on opening
+    #https://stackoverflow.com/questions/7966119/display-fullscreen-mode-on-tkinter
     class FullScreenApp(object):
         def __init__(self, master, **kwargs):
             self.master=master
@@ -330,7 +334,6 @@ def windowInit():
     fig = Figure(figsize=(15,8))
     a = fig.add_subplot(111)
 
-
     #adding of the plot on the window
     canvas = FigureCanvasTkAgg(fig,frame2)
     canvas.draw()
@@ -475,7 +478,20 @@ def windowInit():
 
     
                     
-######################### menu déroulant (de boutons) des différents graphes ########################                 
+######################### menu déroulant (de boutons) des différents graphes ########################
+#https://stackoverflow.com/questions/7966119/display-fullscreen-mode-on-tkinter
+#https://stackoverflow.com/questions/39447138/how-can-i-identify-buttons-created-in-a-loop
+#https://stackoverflow.com/questions/627435/how-to-remove-an-element-from-a-list-by-index
+#https://stackoverflow.com/questions/31762698/dynamic-button-with-scrollbar-in-tkinter-python
+#https://stackoverflow.com/questions/45728548/how-can-i-get-the-button-id-when-it-is-clicked
+#https://stackoverflow.com/questions/50787864/how-do-i-make-a-tkinter-button-in-an-list-of-buttons-return-its-index
+#https://stackoverflow.com/questions/15009117/how-to-have-image-text-in-one-button-in-tkinter
+#https://stackoverflow.com/questions/35282482/tkinter-button-changes-color-after-having-hovered-on-it
+#https://stackoverflow.com/questions/2744795/background-color-for-tk-in-python
+#https://stackoverflow.com/questions/51889265/how-create-button-with-png-background-in-tkinter
+#https://stackoverflow.com/questions/40780634/tkinter-canvas-window-size
+#https://stackoverflow.com/questions/5612237/inserting-a-button-into-a-tkinter-listbox-on-python
+
     display = Frame(frame1,bg="white")
     display.grid(row=25,column=0,columnspan=1,sticky=EW)
 
@@ -537,6 +553,8 @@ def windowInit():
         approxvariable.set("/")
         interpvariable.set("aucune")
         evalexpr.delete(0,'end')
+        for item in button_identities:
+            item.destroy()
         a.clear()
         canvas.draw()
 
