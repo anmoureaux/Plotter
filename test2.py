@@ -14,7 +14,7 @@ photo2=ImageTk.PhotoImage(file="button2v3.png")
 
 class HoverButton(tk.Button):
     def __init__(self, master, **kw):
-        tk.Button.__init__(self,master=master,image=photo1,bg="white",activebackground="white",relief=tk.FLAT,**kw)
+        tk.Button.__init__(self,master=master,compound="center",image=photo1,bg="white",activebackground="white",relief=tk.FLAT,**kw)
         self.bind("<Enter>", self.on_enter)
         self.bind("<Leave>", self.on_leave)
     def on_enter(self,e):
