@@ -28,6 +28,7 @@ from tkinter import * #window
 import scipy.stats as stats #approximations and interpolations
 from scipy.interpolate import CubicSpline as spline
 from PIL import Image, ImageTk
+from functools import partial
 
 ############################### scrollable list of buttons ##############################
 #(https://stackoverflow.com/questions/31762698/dynamic-button-with-scrollbar-in-tkinter-python)
@@ -496,13 +497,17 @@ def windowInit():
             self['background'] = "white"
 
     mylist=['graph1','graph2','graph3','graph4','graph5','graph6','graph7','graph8','graph9','graph10','graph11','graph12']
-    for i, x in enumerate(mylist):
-        btn = HoverButton(scframe.interior,text=mylist[i],command=lambda i=i,x=x: openlink(i))
-        btn.pack(padx=10, pady=5, side=TOP)
-        
-    def openlink(i):
-        print(mylist[i])
+    button_identities = []
     
+    def suppress(n):
+        bname=(button_identities[n])
+        bname.destroy()
+
+    for i in range(len(mylist)):
+        btn = HoverButton(scframe.interior,text=mylist[i],command=partial(suppress,i))
+        btn.pack(padx=10, pady=5, side=TOP)
+        button_identities.append(btn)
+        
     butts = Frame(frame1,bg="white")
     butts.grid(row=25,column=1,columnspan=1,sticky=EW)
     
